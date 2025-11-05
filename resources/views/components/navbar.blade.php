@@ -8,15 +8,19 @@
 
     <div class="flex items-center gap-2 flex-wrap justify-end w-auto lg:w-auto">
         <div class="hidden lg:flex items-center gap-4">
-            <x-dropdown label="Settings" icon="o-cog-6-tooth" class="btn-ghost">
-                <x-menu-item title="Wifi" icon="o-wifi" link="#" />
-                <x-menu-item title="Archives" icon="o-archive-box" link="#" />
-            </x-dropdown>
-            <x-button label="Home" icon="o-home" link="#" class="btn-ghost" responsive />
-            <x-button label="Messages" icon="o-envelope" link="#" class="btn-ghost" responsive />
+            <x-menu activate-by-route class="flex-row gap-4">
+                <x-menu-item title="Usuarios" icon="o-user-group" link="#" />
+                <x-menu-item title="Venta" icon="o-currency-dollar" link="#" />
+                <x-menu-item title="Reportes" icon="o-document-currency-dollar" link="#" />
+                <x-dropdown label="Almacen" class="btn-ghost" icon="o-building-storefront">
+                    <x-menu-item title="Productos" icon="o-wifi" link="#" />
+                    <x-menu-item title="Marcas" icon="o-percent-badge" link="#" />
+                    <x-menu-item title="Categorías" icon="o-tag" link="#" />
+                </x-dropdown>
+            </x-menu>
         </div>
 
-        <x-theme-toggle class="btn btn-circle btn-ghost" darkTheme="dark" lightTheme="caramellatte" />
+        <x-theme-toggle class="btn btn-circle btn-ghost" darkTheme="coffee" lightTheme="caramellatte" />
 
         <div class="hidden lg:flex items-center gap-2">
             @auth
@@ -24,10 +28,10 @@
                 <livewire:auth.logout />
             @else
                 @if(Route::has('login'))
-                    <a href="{{ route('login') }}" class="btn btn-ghost">Ingresar</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Ingresar</a>
                 @endif
                 @if(Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-ghost">Registrarse</a>
+                    <a href="{{ route('register') }}" class="btn btn-outline">Registrarse</a>
                 @endif
             @endauth
         </div>
