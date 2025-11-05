@@ -10,12 +10,14 @@
 
     <!-- Menú principal: ocupa el espacio disponible -->
     <x-menu activate-by-route class="flex-1 overflow-y-auto px-2 py-3">
-        <x-menu-item title="Home" icon="o-home" link="#" />
-        <x-menu-item title="Messages" icon="o-envelope" link="#" />
+        <x-menu-item title="Usuarios" icon="o-user-group" link="#" />
+        <x-menu-item title="Venta" icon="o-currency-dollar" link="#" />
+        <x-menu-item title="Reportes" icon="o-document-currency-dollar" link="#" />
 
-        <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-            <x-menu-item title="Wifi" icon="o-wifi" link="#" />
-            <x-menu-item title="Archives" icon="o-archive-box" link="#" />
+        <x-menu-sub title="Almacen" icon="o-building-storefront">
+            <x-menu-item title="Productos" icon="o-wifi" link="#" />
+            <x-menu-item title="Marcas" icon="o-percent-badge" link="#" />
+            <x-menu-item title="Categorías" icon="o-tag" link="#" />
         </x-menu-sub>
     </x-menu>
 
@@ -29,10 +31,10 @@
         @else
             <div class="flex flex-col gap-2">
                 @if (Route::has('login'))
-                    <a href="{{ route('login') }}" class="btn btn-sm btn-outline w-full">Ingresar</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary w-full">Ingresar</a>
                 @endif
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-sm btn-primary w-full">Registrarse</a>
+                    <a href="{{ route('register') }}" class="btn btn-outline w-full">Registrarse</a>
                 @endif
             </div>
         @endauth

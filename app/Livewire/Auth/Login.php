@@ -23,7 +23,7 @@ class Login extends Component
 
         if (Auth::attempt(
             ['email' => $this->email, 'password' => $this->password],
-            $this->remember // true → persistente, false → solo sesión
+            $this->remember
         )) {
             session()->regenerate();
             return redirect()->route('dashboard');

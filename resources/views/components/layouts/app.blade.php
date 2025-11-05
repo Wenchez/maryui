@@ -29,4 +29,5 @@
     <x-toast />
     <x-theme-toggle class="hidden" />
 </body>
+
 </html>

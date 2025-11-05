@@ -1,8 +1,8 @@
 <div>
-    <button 
-        wire:click="logout" 
-        class="btn btn-ghost"
-    >
-        Cerrar sesión
-    </button>
+    <x-button 
+        label="Cerrar sesión"
+        class="btn-error"
+        wire:click="logout"
+        spinner="logout"
+    />
 </div>
