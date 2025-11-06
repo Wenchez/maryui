@@ -7,8 +7,7 @@
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <title>{{ $title ?? config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <livewire:styles />
-    <livewire:scripts />
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased bg-base-100 min-h-screen">
@@ -20,7 +19,7 @@
         </x-slot:sidebar>
 
         <x-slot:content>
-            <div class="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
+            <div class="flex-1 flex items-center">
                 {{ $slot }}
             </div>
         </x-slot:content>
@@ -28,6 +27,8 @@
     
     <x-toast />
     <x-theme-toggle class="hidden" />
+
+    @livewireScripts
 </body>
 
 </html>

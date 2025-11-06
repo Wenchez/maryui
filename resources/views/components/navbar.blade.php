@@ -9,11 +9,12 @@
     <div class="flex items-center gap-2 flex-wrap justify-end w-auto lg:w-auto">
         <div class="hidden lg:flex items-center gap-4">
             <x-menu activate-by-route class="flex-row gap-4">
-                <x-menu-item title="Usuarios" icon="o-user-group" link="#" />
+                <x-menu-item title="Dashboard" icon="o-home" :link="route('dashboard')" />
+                <x-menu-item title="Usuarios" icon="o-user-group" :link="route('usuarios.index')" />
                 <x-menu-item title="Venta" icon="o-currency-dollar" link="#" />
                 <x-menu-item title="Reportes" icon="o-document-currency-dollar" link="#" />
                 <x-dropdown label="Almacen" class="btn-ghost" icon="o-building-storefront">
-                    <x-menu-item title="Productos" icon="o-wifi" link="#" />
+                    <x-menu-item title="Productos" icon="o-shopping-bag" link="#" />
                     <x-menu-item title="Marcas" icon="o-percent-badge" link="#" />
                     <x-menu-item title="Categorías" icon="o-tag" link="#" />
                 </x-dropdown>
