@@ -34,22 +34,19 @@ class UserEditModal extends Component
 
     public function update()
     {
-        $user = User::findOrFail($this->userId);
-
         $this->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->user_id . ',user_id',
+            'email' => 'required|email|unique:users,email,' . $this->userId . ',user_id',
             'role' => 'required|in:manager,cashier',
         ]);
 
-        $user->update([
+        User::updateUser($this->userId, [
             'name' => $this->name,
             'email' => $this->email,
             'role' => $this->role,
         ]);
 
         $this->showModal = false;
-
         $this->dispatch('userUpdated');
     }
 
