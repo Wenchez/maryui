@@ -101,13 +101,13 @@ class Product extends Model
         return 'PROD_' . str_pad($number, 3, '0', STR_PAD_LEFT);
     }
 
-    public static function generateImageFilename($productTypeName, $brandName, $productCode, $productName, $extension)
+    public static function generateImageFilename($productCode, $productTypeName, $brandName, $productName, $extension)
     {
         $productTypeName = str_replace(' ', '_', $productTypeName);
         $brandName       = str_replace(' ', '_', $brandName);
         $productName     = str_replace(' ', '_', $productName);
 
-        return "{$productTypeName}-{$brandName}-{$productCode}-{$productName}.{$extension}";
+        return "{$productCode}-{$productTypeName}-{$brandName}-{$productName}.{$extension}";
     }
 
     public function getFormattedPriceAttribute()
