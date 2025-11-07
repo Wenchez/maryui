@@ -20,6 +20,7 @@ class Product extends Model
         'product_name',
         'product_stock',
         'product_price',
+        'product_gender',
         'product_image',
         'product_availability_status',
         'product_stock_status',
@@ -65,6 +66,7 @@ class Product extends Model
             'product_name' => $data->product_name,
             'product_stock' => $data->product_stock,
             'product_price' => $data->product_price,
+            'product_gender' => $data->product_gender ?? 'unisex',
             'product_image' => $data->product_image ?? null,
             'product_availability_status' => 'available',
             'product_stock_status' => ($data['product_stock'] > 0) ? 'inStock' : 'stockOut', 
@@ -117,6 +119,16 @@ class Product extends Model
     public function getFormattedPriceAttribute()
     {
         return '$' . number_format($this->product_price, 2);
+    }
+
+    public function getGenderLabelAttribute()
+    {
+        return match($this->product_gender) {
+            'male' => 'Masculino',
+            'female' => 'Femenino',
+            'unisex' => 'Unisex',
+            default => 'Unisex',
+        };
     }
     
     public function getProductImageUrlAttribute()

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('product_name', 255);
             $table->integer('product_stock')->default(0);
             $table->decimal('product_price', 10, 2);
+            $table->enum('product_gender', ['male', 'female', 'unisex'])->default('unisex')->after('type_name');
             $table->string('product_image')->nullable();
             $table->enum('product_availability_status', ['available', 'discontinued'])->default('available');
             $table->enum('product_stock_status', ['inStock', 'stockOut'])->default('inStock');
