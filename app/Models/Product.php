@@ -73,6 +73,47 @@ class Product extends Model
         ]);
     }
 
+    public static function showProducts($filters = [])
+    {
+        $query = self::query()->available();
+
+        if (!empty($filters['gender'])) {
+            $query->gender($filters['gender']);
+        }
+        if (!empty($filters['type_id'])) {
+            $query->type($filters['type_id']);
+        }
+        if (!empty($filters['order'])) {
+            $query->orderByPrice($filters['order']);
+        }
+
+        return $query->get();
+    }
+
+
+    public static function search($filters = [])
+    {
+        $query = self::query();
+
+        if (!empty($filters['name'])) {
+            $query->where('product_name', 'like', '%' . $filters['name'] . '%');
+        }
+        if (!empty($filters['price_min'])) {
+            $query->where('product_price', '>=', $filters['price_min']);
+        }
+        if (!empty($filters['price_max'])) {
+            $query->where('product_price', '<=', $filters['price_max']);
+        }
+        if (!empty($filters['gender'])) {
+            $query->gender($filters['gender']);
+        }
+        if (!empty($filters['type_id'])) {
+            $query->type($filters['type_id']);
+        }
+
+        return $query->get();
+    }
+
     public static function updateProduct($productId, $data)
     {
         $product = self::findOrFail($productId);
@@ -156,6 +197,27 @@ class Product extends Model
         );
 
         return $newImage->storeAs('products', $filename, 'public');
+    }
+
+    // Scopes
+    public function scopeAvailable($query)
+    {
+        return $query->where('product_availability_status', 'available');
+    }
+
+    public function scopeGender($query, $gender)
+    {
+        return $query->where('product_gender', $gender);
+    }
+
+    public function scopeType($query, $typeId)
+    {
+        return $query->where('product_type_id', $typeId);
+    }
+
+    public function scopeOrderByPrice($query, $order = 'asc')
+    {
+        return $query->orderBy('product_price', $order);
     }
 
     protected static function booted()
