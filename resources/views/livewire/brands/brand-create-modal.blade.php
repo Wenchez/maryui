@@ -6,7 +6,8 @@
         <x-input label="Descripción de la marca" wire:model.defer="brand_description" first-error-only />
 
         <x-slot:actions>
-            <x-button label="Crear" class="btn-primary w-full" type="submit" spinner="update" />
+            <x-button label="Cancelar" class="btn-outline mr-2" wire:click="$set('showModal', false)" />
+            <x-button label="Crear" class="btn-success" type="submit" spinner="update" />
         </x-slot:actions>
     </x-form>
 </x-modal>
