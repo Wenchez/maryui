@@ -10,6 +10,7 @@ class BrandDeleteModal extends Component
     public $brandId;
     public $brandName;
     public $showModal = false;
+    public $errorMessage = null;
     
     protected $listeners = ['deleteBrand' => 'open'];
 
@@ -24,10 +25,13 @@ class BrandDeleteModal extends Component
 
     public function delete()
     {
-        if ($this->brandId) {
+        try {
             Brand::deleteBrand($this->brandId);
             $this->showModal = false;
             $this->dispatch('brandUpdated');
+            $this->errorMessage = null; // limpiar mensaje en caso de éxito
+        } catch (\Exception $e) {
+            $this->errorMessage = $e->getMessage(); // guardar mensaje de error
         }
     }
     

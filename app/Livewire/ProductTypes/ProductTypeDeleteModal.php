@@ -10,6 +10,7 @@ class ProductTypeDeleteModal extends Component
     public $product_typeId;
     public $product_typeName;
     public $showModal = false;
+    public $errorMessage = null;
     
     protected $listeners = ['deleteProductType' => 'open'];
 
@@ -28,6 +29,14 @@ class ProductTypeDeleteModal extends Component
             ProductType::deleteProductType($this->product_typeId);
             $this->showModal = false;
             $this->dispatch('productTypeUpdated');
+        }
+        try {
+            ProductType::deleteProductType($this->product_typeId);
+            $this->showModal = false;
+            $this->dispatch('productTypeUpdated');
+            $this->errorMessage = null; // limpiar mensaje en caso de éxito
+        } catch (\Exception $e) {
+            $this->errorMessage = $e->getMessage(); // guardar mensaje de error
         }
     }
 

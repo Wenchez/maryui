@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class Brand extends Model
 {
@@ -34,11 +35,16 @@ class Brand extends Model
     public static function deleteBrand($brandId)
     {
         $brand = self::findOrFail($brandId);
-        return $brand->delete();
+
+        try {
+            return $brand->delete();
+        } catch (QueryException $e) {
+            throw new \Exception('No se puede eliminar la marca porque tiene productos asociados.');
+        }
     }
 
-    /* public function products()
+    public function products()
     {
         return $this->hasMany(Product::class, 'brand_id', 'brand_id');
-    } */
+    }
 }

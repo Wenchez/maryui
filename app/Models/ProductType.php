@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class ProductType extends Model
 {
@@ -35,6 +36,15 @@ class ProductType extends Model
     public static function deleteProductType($product_typeId)
     {
         $product_type = self::findOrFail($product_typeId);
-        return $product_type->delete();
+        try {
+            return $product_type->delete();
+        } catch (QueryException $e) {
+            throw new \Exception('No se puede eliminar la categoría porque tiene productos asociados.');
+        }
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_type_id', 'product_type_id');
     }
 }
