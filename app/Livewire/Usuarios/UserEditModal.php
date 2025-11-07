@@ -16,7 +16,7 @@ class UserEditModal extends Component
     protected $listeners = ['editUser' => 'open'];
 
     protected $rules = [
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|max:30',
         'email' => 'required|email',
         'role' => 'required|in:manager,cashier',
     ];

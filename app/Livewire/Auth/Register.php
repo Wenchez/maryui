@@ -16,7 +16,7 @@ class Register extends Component
     public $role;
 
     protected $rules = [
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|max:30',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:6|confirmed',
         'role' => 'required|in:manager,cashier',

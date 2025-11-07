@@ -15,7 +15,7 @@
                 <x-menu-item title="Reportes" icon="o-document-currency-dollar" class="font-bold" link="#" />
                 <x-dropdown label="Almacen" class="btn-ghost font-bold" icon="o-building-storefront">
                     <x-menu-item title="Productos" icon="o-shopping-bag" link="#" />
-                    <x-menu-item title="Marcas" icon="o-percent-badge" link="#" />
+                    <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
                     <x-menu-item title="Categorías" icon="o-tag" link="#" />
                 </x-dropdown>
             </x-menu>

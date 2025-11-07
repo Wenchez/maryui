@@ -17,7 +17,7 @@
 
         <x-menu-sub title="Almacen" icon="o-building-storefront">
             <x-menu-item title="Productos" icon="o-shopping-bag" link="#" />
-            <x-menu-item title="Marcas" icon="o-percent-badge" link="#" />
+            <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
             <x-menu-item title="Categorías" icon="o-tag" link="#" />
         </x-menu-sub>
     </x-menu>
