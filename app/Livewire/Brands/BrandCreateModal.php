@@ -21,6 +21,8 @@ class BrandCreateModal extends Component
 
     public function open()
     {
+        $this->brand_name = '';
+        $this->brand_description = '';
         $this->showModal = true;
     }
 
