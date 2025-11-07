@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -73,6 +74,9 @@ class Product extends Model
     public static function updateProduct($productId, $data)
     {
         $product = self::findOrFail($productId);
+        if (isset($data['product_image']) && $data['product_image']) {
+            $data['product_image'] = self::handleImageUpdate($product, $data['product_image'], $data['product_name'] ?? null);
+        }
         $product->update($data);
         return $product;
     }
@@ -101,7 +105,7 @@ class Product extends Model
         return 'PROD_' . str_pad($number, 3, '0', STR_PAD_LEFT);
     }
 
-    public static function generateImageFilename($productCode, $productTypeName, $brandName, $productName, $extension)
+    public static function generateImageFilename($productTypeName, $brandName, $productCode, $productName, $extension)
     {
         $productTypeName = str_replace(' ', '_', $productTypeName);
         $brandName       = str_replace(' ', '_', $brandName);
@@ -121,6 +125,25 @@ class Product extends Model
             return asset('storage/' . $this->product_image);
         }
         return asset('images/default.png');
+    }
+
+    protected static function handleImageUpdate($product, $newImage, $newName = null)
+    {
+        if ($product->product_image && Storage::disk('public')->exists($product->product_image)) {
+            Storage::disk('public')->delete($product->product_image);
+        }
+
+        $extension = $newImage->getClientOriginalExtension();
+
+        $filename = self::generateImageFilename(
+            $product->productType->type_name,
+            $product->brand->brand_name,
+            $product->product_code,
+            $newName ?? $product->product_name,
+            $extension
+        );
+
+        return $newImage->storeAs('products', $filename, 'public');
     }
 
     protected static function booted()
