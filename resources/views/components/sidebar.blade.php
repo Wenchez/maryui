@@ -16,7 +16,7 @@
         <x-menu-item title="Reportes" icon="o-document-currency-dollar" link="#" />
 
         <x-menu-sub title="Almacen" icon="o-building-storefront">
-            <x-menu-item title="Productos" icon="o-shopping-bag" link="#" />
+            <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
             <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
             <x-menu-item title="Categorías" icon="o-tag" :link="route('product-types.index')" />
         </x-menu-sub>
