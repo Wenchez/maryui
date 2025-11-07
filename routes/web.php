@@ -6,6 +6,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Dashboard;
 use App\Livewire\Usuarios\Index as UsuariosIndex;
 use App\Livewire\Brands\Index as BrandsIndex;
+use App\Livewire\ProductTypes\Index as ProductTypesIndex;
 
 Route::get('/', fn() => view('welcome'))->name('welcome');
 
@@ -13,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
     Route::get('/marcas', BrandsIndex::class)->name('brands.index');
+    Route::get('/tipos_de_productos', ProductTypesIndex::class)->name('product-types.index');
 });
 
 // Ruta para el Registro
