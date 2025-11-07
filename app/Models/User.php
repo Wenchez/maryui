@@ -42,4 +42,17 @@ class User extends Authenticatable
     {
         return $this->role === 'cashier';
     }
+
+    public static function updateUser($userId, $data)
+    {
+        $user = self::findOrFail($userId);
+        $user->update($data);
+        return $user;
+    }
+
+    public static function deleteUser($userId)
+    {
+        $user = self::findOrFail($userId);
+        return $user->delete();
+    }
 }

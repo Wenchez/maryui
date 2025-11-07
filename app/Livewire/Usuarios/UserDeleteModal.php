@@ -25,12 +25,8 @@ class UserDeleteModal extends Component
     public function delete()
     {
         if ($this->userId) {
-            User::destroy($this->userId);
-
-            // Cerrar modal
+            User::deleteUser($this->userId);
             $this->showModal = false;
-
-            // Refrescar tabla
             $this->dispatch('userUpdated');
         }
     }
