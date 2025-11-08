@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id('product_id');
-            $table->unsignedBigInteger('brand_id');
-            $table->unsignedBigInteger('product_type_id');
+            $table->unsignedInteger('brand_id');
+            $table->unsignedInteger('product_type_id');
             $table->date('product_date');
             $table->string('product_code', 50)->unique();
             $table->string('product_name', 255);
             $table->integer('product_stock')->default(0);
             $table->decimal('product_price', 10, 2);
-            $table->enum('product_gender', ['male', 'female', 'unisex'])->default('unisex')->after('type_name');
+            $table->enum('product_gender', ['male', 'female', 'unisex'])->default('unisex');
             $table->string('product_image')->nullable();
             $table->enum('product_availability_status', ['available', 'discontinued'])->default('available');
             $table->enum('product_stock_status', ['inStock', 'stockOut'])->default('inStock');

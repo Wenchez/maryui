@@ -18,6 +18,11 @@ class ProductType extends Model
         'product_type_description',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_type_id', 'product_type_id');
+    }
+
     public static function createProductType($data)
     {
         return self::create([
@@ -43,8 +48,9 @@ class ProductType extends Model
         }
     }
 
-    public function products()
+    // Paara los filtros por categoría
+    public static function getAllTypes()
     {
-        return $this->hasMany(Product::class, 'product_type_id', 'product_type_id');
+        return self::select('product_type_id', 'product_type_name')->orderBy('product_type_name')->get();
     }
 }

@@ -17,6 +17,11 @@ class Brand extends Model
         'brand_description',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id', 'brand_id');
+    }
+
     public static function createBrand($data)
     {
         return self::create([
@@ -43,8 +48,9 @@ class Brand extends Model
         }
     }
 
-    public function products()
+    // Para los filtros por marca
+    public static function getAllBrands()
     {
-        return $this->hasMany(Product::class, 'brand_id', 'brand_id');
+        return self::select('brand_id', 'brand_name')->orderBy('brand_name')->get();
     }
 }

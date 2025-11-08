@@ -45,9 +45,12 @@ class Product extends Model
         if (isset($data['product_image']) && $data['product_image']) {
             $extension = $data['product_image']->getClientOriginalExtension();
 
+            $brand = Brand::find($data['brand_id']);
+            $type  = ProductType::find($data['product_type_id']);
+
             $filename = self::generateImageFilename(
-                $data['product_type_name'],
-                $data['brand_name'],
+                $type->product_type_name ?? 'Tipo',
+                $brand->brand_name ?? 'Marca',
                 $data['product_code'],
                 $data['product_name'],
                 $extension
@@ -59,17 +62,17 @@ class Product extends Model
         $data['product_image'] = $imagePath;
         
         return self::create([
-            'brand_id' => $data->brand_id,
-            'product_type_id' => $data->product_type_id,
-            'product_date' => $data->product_date,
-            'product_code' => $data->product_code,
-            'product_name' => $data->product_name,
-            'product_stock' => $data->product_stock,
-            'product_price' => $data->product_price,
-            'product_gender' => $data->product_gender ?? 'unisex',
-            'product_image' => $data->product_image ?? null,
+            'brand_id' => $data['brand_id'],
+            'product_type_id' => $data['product_type_id'],
+            'product_date' => $data['product_date'],
+            'product_code' => $data['product_code'],
+            'product_name' => $data['product_name'],
+            'product_stock' => $data['product_stock'],
+            'product_price' => $data['product_price'],
+            'product_gender' => $data['product_gender'] ?? 'unisex',
+            'product_image' => $data['product_image'] ?? null,
             'product_availability_status' => 'available',
-            'product_stock_status' => ($data['product_stock'] > 0) ? 'inStock' : 'stockOut', 
+            'product_stock_status' => ($data['product_stock'] > 0) ? 'inStock' : 'stockOut',
         ]);
     }
 
@@ -90,30 +93,6 @@ class Product extends Model
         return $query->get();
     }
 
-
-    public static function search($filters = [])
-    {
-        $query = self::query();
-
-        if (!empty($filters['name'])) {
-            $query->where('product_name', 'like', '%' . $filters['name'] . '%');
-        }
-        if (!empty($filters['price_min'])) {
-            $query->where('product_price', '>=', $filters['price_min']);
-        }
-        if (!empty($filters['price_max'])) {
-            $query->where('product_price', '<=', $filters['price_max']);
-        }
-        if (!empty($filters['gender'])) {
-            $query->gender($filters['gender']);
-        }
-        if (!empty($filters['type_id'])) {
-            $query->type($filters['type_id']);
-        }
-
-        return $query->get();
-    }
-
     public static function updateProduct($productId, $data)
     {
         $product = self::findOrFail($productId);
@@ -127,6 +106,11 @@ class Product extends Model
     public static function deleteProduct($productId)
     {
         $product = self::findOrFail($productId);
+
+        if ($product->product_image && Storage::disk('public')->exists($product->product_image)) {
+            Storage::disk('public')->delete($product->product_image);
+        }
+
         return $product->delete();
     }
 
@@ -177,7 +161,7 @@ class Product extends Model
         if ($this->product_image) {
             return asset('storage/' . $this->product_image);
         }
-        return asset('images/default.png');
+        return asset('storage/app/public/products/default.jpeg');
     }
 
     protected static function handleImageUpdate($product, $newImage, $newName = null)
@@ -189,7 +173,7 @@ class Product extends Model
         $extension = $newImage->getClientOriginalExtension();
 
         $filename = self::generateImageFilename(
-            $product->productType->type_name,
+            $product->productType->product_type_name,
             $product->brand->brand_name,
             $product->product_code,
             $newName ?? $product->product_name,
@@ -199,7 +183,44 @@ class Product extends Model
         return $newImage->storeAs('products', $filename, 'public');
     }
 
+    public static function getFilteredProducts($filters = [], $perPage = 12)
+    {
+        $query = self::query()->available()
+            ->with(['brand', 'productType']); // evitar N+1
+
+        if (!empty($filters['search'])) {
+            $query->where('product_name', 'like', '%' . $filters['search'] . '%');
+        }
+
+        if (!empty($filters['gender'])) {
+            $query->gender($filters['gender']);
+        }
+
+        if (!empty($filters['type_id'])) {
+            $query->type($filters['type_id']);
+        }
+
+        if (!empty($filters['price_min'])) {
+            $query->where('product_price', '>=', $filters['price_min']);
+        }
+
+        if (!empty($filters['price_max'])) {
+            $query->where('product_price', '<=', $filters['price_max']);
+        }
+
+        if (!empty($filters['order'])) {
+            $query->orderByPrice($filters['order']);
+        }
+
+        return $query->paginate($perPage);
+    }
+
     // Scopes
+    public function scopeSearch($query, $term)
+    {
+        return $query->where('product_name', 'like', "%{$term}%");
+    }
+
     public function scopeAvailable($query)
     {
         return $query->where('product_availability_status', 'available');
@@ -223,9 +244,18 @@ class Product extends Model
     protected static function booted()
     {
         static::saving(function ($product) {
+            // Estado del stock
             $product->product_stock_status = ($product->product_stock <= 0) ? 'stockOut' : 'inStock';
-            if ($product->product_stock < 0) {
-                $product->product_stock = 0;
+
+            // Estado de disponibilidad
+            if ($product->product_availability_status === null) {
+                $product->product_availability_status = 'available';
+            }
+
+            // Generar código si no existe
+            if (empty($product->product_code)) {
+                $prefix = strtoupper(substr($product->product_name, 0, 3));
+                $product->product_code = $prefix . '-' . strtoupper(uniqid());
             }
         });
     }

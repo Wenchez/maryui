@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="text-center mt-24">
+    <div class="w-full text-center mt-24">
         <h1 class="text-4xl font-bold mb-6">Bienvenido a Ximenabags</h1>
         <p class="mb-6">Regístrate o ingresa para explorar nuestra tienda.</p>
 
