@@ -27,7 +27,7 @@
                             <x-input type="number" label="Cantidad" wire:model.defer="product_stock" min="0"
                                 step="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                 class="flex-1 w-full" />
-                            <x-input type="number" step="0.01" label="Precio" icon="o-currency-dollar"
+                            <x-input type="text" step="0.01" label="Precio" icon="o-currency-dollar"
                                 wire:model.defer="product_price" min="0" money class="flex-1 w-full" />
                         </div>
 

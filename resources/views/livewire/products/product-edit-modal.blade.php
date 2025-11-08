@@ -8,13 +8,8 @@
 
                 <div class="flex items-center justify-center w-full md:w-auto flex-1 md:flex-none">
                     <x-file wire:model="product_image" accept="image/*" label="Foto" crop-after-change>
-                        <img src="
-                            @if ($product_image instanceof \Livewire\TemporaryUploadedFile) {{ $product_image->temporaryUrl() }}
-                            @elseif($product_image)
-                                {{ asset('storage/' . $product_image) }}
-                            @else
-                                {{ asset('storage/products/default.jpeg') }} @endif
-                        " class="h-90 w-90 rounded-xl object-cover border" />
+                        <img src="{{ $product_image ? $product_image->temporaryUrl() : asset('storage/products/default.jpeg') }}"
+                            class="h-90 w-90 rounded-xl object-cover border" />
                     </x-file>
                 </div>
 
@@ -27,7 +22,7 @@
                         <x-input type="number" label="Cantidad" wire:model.defer="product_stock" min="0"
                             step="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                             class="flex-1 w-full" />
-                        <x-input type="number" step="0.01" label="Precio" icon="o-currency-dollar"
+                        <x-input type="text" step="0.01" label="Precio" icon="o-currency-dollar"
                             wire:model.defer="product_price" min="0" money class="flex-1 w-full" />
                     </div>
 
@@ -42,11 +37,6 @@
                         ['id' => 'female', 'name' => 'Femenino'],
                     ]" option-value="id"
                         option-label="name" class="w-full!" />
-                    <x-select label="Estado del producto" wire:model="product_availability_status" :options="[
-                        ['id' => 'available', 'name' => 'En venta'],
-                        ['id' => 'discontinued', 'name' => 'No disponible'],
-                    ]"
-                        option-value="id" option-label="name" class="flex-1 w-full!" />
                 </div>
 
             </div>
