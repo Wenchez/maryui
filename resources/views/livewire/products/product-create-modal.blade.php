@@ -49,7 +49,7 @@
 
             <x-slot:actions>
                 <x-button label="Cancelar" class="btn-outline mr-2" wire:click="$set('showModal', false)" />
-                <x-button label="Guardar" class="btn-success" type="submit" spinner="update" />
+                <x-button label="Crear" class="btn-success" type="submit" spinner="update" />
             </x-slot:actions>
         </x-form>
     </x-modal>
