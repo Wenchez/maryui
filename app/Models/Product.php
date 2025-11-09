@@ -185,7 +185,9 @@ class Product extends Model
 
     public static function getFilteredProducts($filters = [], $perPage = 12)
     {
-        $query = self::query()->available()
+        $query = self::query()
+            ->available()
+            ->where('product_stock_status', 'inStock')
             ->with(['brand', 'productType']); // evitar N+1
 
         if (!empty($filters['search'])) {
@@ -226,9 +228,14 @@ class Product extends Model
         return $query->where('product_availability_status', 'available');
     }
 
-    public function scopeGender($query, $gender)
+    public function scopeGender($query, $genders)
     {
-        return $query->where('product_gender', $gender);
+        if (is_array($genders) && count($genders) > 0) {
+            return $query->whereIn('product_gender', $genders);
+        } elseif (!is_array($genders)) {
+            return $query->where('product_gender', $genders);
+        }
+        return $query;
     }
 
     public function scopeType($query, $typeId)
