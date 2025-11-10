@@ -59,7 +59,7 @@ class Product extends Model
             $imagePath = $data['product_image']->storeAs('products', $filename, 'public');
         }
 
-        $data['product_image'] = $imagePath;
+        $data['product_image'] = $imagePath ?? 'products/default.jpeg';
         
         return self::create([
             'brand_id' => $data['brand_id'],
@@ -70,7 +70,7 @@ class Product extends Model
             'product_stock' => $data['product_stock'],
             'product_price' => $data['product_price'],
             'product_gender' => $data['product_gender'] ?? 'unisex',
-            'product_image' => $data['product_image'] ?? null,
+            'product_image' => $data['product_image'],
             'product_availability_status' => 'available',
             'product_stock_status' => ($data['product_stock'] > 0) ? 'inStock' : 'stockOut',
         ]);
