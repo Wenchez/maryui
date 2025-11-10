@@ -19,7 +19,7 @@ DB_DATABASE=ximenabags
 DB_USERNAME=root
 DB_PASSWORD=
 
-Modificar estos campos en config/app.php
+## Modificar estos campos en config/app.php
 
     'locale' => env('APP_LOCALE', 'en'),
 
