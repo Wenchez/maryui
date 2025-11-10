@@ -59,7 +59,7 @@ class Product extends Model
             $imagePath = $data['product_image']->storeAs('products', $filename, 'public');
         }
 
-        $data['product_image'] = $imagePath;
+        $data['product_image'] = $imagePath ?? 'products/default.jpeg';
         
         return self::create([
             'brand_id' => $data['brand_id'],
@@ -70,7 +70,7 @@ class Product extends Model
             'product_stock' => $data['product_stock'],
             'product_price' => $data['product_price'],
             'product_gender' => $data['product_gender'] ?? 'unisex',
-            'product_image' => $data['product_image'] ?? null,
+            'product_image' => $data['product_image'],
             'product_availability_status' => 'available',
             'product_stock_status' => ($data['product_stock'] > 0) ? 'inStock' : 'stockOut',
         ]);
@@ -185,7 +185,9 @@ class Product extends Model
 
     public static function getFilteredProducts($filters = [], $perPage = 12)
     {
-        $query = self::query()->available()
+        $query = self::query()
+            ->available()
+            ->where('product_stock_status', 'inStock')
             ->with(['brand', 'productType']); // evitar N+1
 
         if (!empty($filters['search'])) {
@@ -226,9 +228,14 @@ class Product extends Model
         return $query->where('product_availability_status', 'available');
     }
 
-    public function scopeGender($query, $gender)
+    public function scopeGender($query, $genders)
     {
-        return $query->where('product_gender', $gender);
+        if (is_array($genders) && count($genders) > 0) {
+            return $query->whereIn('product_gender', $genders);
+        } elseif (!is_array($genders)) {
+            return $query->where('product_gender', $genders);
+        }
+        return $query;
     }
 
     public function scopeType($query, $typeId)

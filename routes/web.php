@@ -8,6 +8,7 @@ use App\Livewire\Usuarios\Index as UsuariosIndex;
 use App\Livewire\Brands\Index as BrandsIndex;
 use App\Livewire\ProductTypes\Index as ProductTypesIndex;
 use App\Livewire\Products\Index as ProductsIndex;
+use App\Livewire\Sales\Index as SalesIndex;
 
 Route::get('/', fn() => view('welcome'))->name('welcome');
 
@@ -17,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/marcas', BrandsIndex::class)->name('brands.index');
     Route::get('/categorias', ProductTypesIndex::class)->name('product-types.index');
     Route::get('/productos', ProductsIndex::class)->name('products.index');
+    Route::get('/ventas', SalesIndex::class)->name('sales.index');
 });
 
 // Ruta para el Registro
