@@ -21,6 +21,10 @@ class Sale extends Model
         'sale_total',
     ];
 
+    protected $casts = [
+        'sale_date' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
@@ -29,6 +33,21 @@ class Sale extends Model
     public function details()
     {
         return $this->hasMany(SaleDetail::class, 'sale_id', 'sale_id');
+    }
+
+    public function getSaleSubtotalAttribute(): float
+    {
+        return round($this->details->sum(fn($d) => $d->line_total), 2);
+    }
+
+    public function getSaleTaxAttribute(): float
+    {
+        return round($this->sale_subtotal * 0.16, 2);
+    }
+
+    public function getSaleTotalAttribute(): float
+    {
+        return round($this->sale_subtotal + $this->sale_tax, 2);
     }
 
     public function calculateTotals()

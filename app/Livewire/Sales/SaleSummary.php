@@ -4,7 +4,6 @@ namespace App\Livewire\Sales;
 
 use Livewire\Component;
 use App\Models\Sale;
-use App\Models\SaleDetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
@@ -47,13 +46,10 @@ class SaleSummary extends Component
 
 
         try {
-            DB::transaction(function () {
+            $sale = DB::transaction(function () {
                 $sale = Sale::create([
                     'sale_date' => now(),
-                    'user_id' => auth()->id() ?? throw new \Exception('Usuario no autenticado'),
-                    'sale_subtotal' => $this->subtotal,
-                    'sale_tax' => $this->tax,
-                    'sale_total' => $this->total,
+                    'user_id' => auth()->id(),
                 ]);
 
                 foreach ($this->saleDetails as $item) {
@@ -68,13 +64,24 @@ class SaleSummary extends Component
                         $product->decrement('product_stock', $item['quantity']);
                     }
                 }
+
+                $sale->refreshTotals(); // calcula subtotal, iva, total
+                return $sale;
             });
 
             $this->dispatch('notify', 'Venta procesada correctamente.');
             $this->dispatch('clear-sale');
+            $this->dispatch('show-ticket', saleId: $sale->sale_id);
         } catch (\Throwable $e) {
             $this->dispatch('notify', 'Error al procesar la venta.');
         }
+    }
+
+    public function ticketPdf($saleId)
+    {
+        $sale = Sale::with('details.product', 'user')->findOrFail($saleId);
+        $pdf = Pdf::loadView('pdf.ticket', compact('sale'));
+        return $pdf->download('ticket-' . $sale->sale_reference . '.pdf');
     }
 
     public function render()

@@ -8,4 +8,5 @@
     <div class="w-90">
         <livewire:sales.sale-panel />
     </div>
+    <livewire:sales.ticket-modal />
 </div>
