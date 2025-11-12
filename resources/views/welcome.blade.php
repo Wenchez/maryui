@@ -87,7 +87,7 @@
                 <x-carousel :slides="$slidesClasicos" />
             </div>
 
-            <!-- Colección Clásicos -->
+            <!-- Colección Bolsos -->
             <div class="mb-8">
                 <h3 class="text-xl font-semibold mb-3">Coleccion de Bolsos</h3>
                 <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
@@ -95,13 +95,13 @@
                     $slidesClasicos = [
                         ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (2).jpeg'],
                         ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (1).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (3).jpeg'],
+                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (2).jpeg'],
                     ];
                 @endphp
                 <x-carousel :slides="$slidesClasicos" />
             </div>
 
-            <!-- Colección Clásicos -->
+            <!-- Colección Accesorios -->
             <div class="mb-8">
                 <h3 class="text-xl font-semibold mb-3">Coleccion de Accesorios</h3>
                 <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
