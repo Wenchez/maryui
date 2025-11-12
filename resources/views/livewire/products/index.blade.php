@@ -6,7 +6,7 @@
     </x-header>
 
    <livewire:products.product-gallery />
-
+    <livewire:products.product-delete-modal />
 
     <livewire:products.product-edit-modal />
 </div>

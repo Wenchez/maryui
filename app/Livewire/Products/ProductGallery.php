@@ -28,6 +28,12 @@ class ProductGallery extends Component
         $this->loadProducts();
     }
 
+    public function deleteProduct($productId)
+    {
+        $this->dispatch('deleteProduct', productId: $productId)->to('products.product-delete-modal');
+    }
+
+
     public function render()
     {
         return view('livewire.products.product-gallery');
