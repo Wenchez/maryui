@@ -39,7 +39,7 @@ class ProductsSaleGrid extends Component
     #[On('product-added')]
     public function handleProductAdded($productData)
     {
-         $this->dispatch('add-product-to-sale', $productData);
+        $this->dispatch('add-product-to-sale', $productData);
     }
 
     public function getProductsProperty()
@@ -55,7 +55,7 @@ class ProductsSaleGrid extends Component
             ->when($search, fn($q, $s) => $q->where('product_name', 'like', "%{$s}%"))
             ->when($brands, fn($q, $b) => $q->whereIn('brand_id', $b))
             ->when($types, fn($q, $t) => $q->whereIn('product_type_id', $t))
-            ->when($genders, fn($q, $g) => $q->whereIn('product_gender', $g)) 
+            ->when($genders, fn($q, $g) => $q->whereIn('product_gender', $g))
             ->with(['brand', 'productType'])
             ->get();
     }
@@ -65,5 +65,11 @@ class ProductsSaleGrid extends Component
         return view('livewire.sales.products-sale-grid', [
             'products' => $this->products,
         ]);
+    }
+
+    #[On('sale-processed')]
+    public function reloadGrid()
+    {
+        $this->dispatch('$refresh');
     }
 }

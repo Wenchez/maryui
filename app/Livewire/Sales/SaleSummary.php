@@ -61,7 +61,8 @@ class SaleSummary extends Component
 
                     $product = Product::find($item['product_id']);
                     if ($product) {
-                        $product->decrement('product_stock', $item['quantity']);
+                        $product->product_stock -= $item['quantity'];
+                        $product->save(); // Actualiza el stock si es necesario
                     }
                 }
 
@@ -72,16 +73,11 @@ class SaleSummary extends Component
             $this->dispatch('notify', 'Venta procesada correctamente.');
             $this->dispatch('clear-sale');
             $this->dispatch('show-ticket', saleId: $sale->sale_id);
+
+            $this->dispatch('sale-processed'); 
         } catch (\Throwable $e) {
             $this->dispatch('notify', 'Error al procesar la venta.');
         }
-    }
-
-    public function ticketPdf($saleId)
-    {
-        $sale = Sale::with('details.product', 'user')->findOrFail($saleId);
-        $pdf = Pdf::loadView('pdf.ticket', compact('sale'));
-        return $pdf->download('ticket-' . $sale->sale_reference . '.pdf');
     }
 
     public function render()
