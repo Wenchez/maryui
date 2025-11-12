@@ -20,7 +20,7 @@
                 ['image' => '/photos/WhatsApp Image 2025-11-11 at 11.01.44 PM (2).jpeg'],
                 ['image' => '/photos/WhatsApp Image 2025-11-11 at 11.01.44 PM.jpeg'],
                 ['image' => '/photos/WhatsApp Image 2025-11-11 at 11.01.44 PM (1).jpeg'],
-                ['image' => '/photos/photo-1572635148818-ef6fd45eb394.jpg'],
+                ['image' => '/photos/WhatsApp Image 2025-11-12 at 12.38.51 AM.jpeg'],
             ];
         @endphp
 
