@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/marcas', BrandsIndex::class)->name('brands.index');
     Route::get('/categorias', ProductTypesIndex::class)->name('product-types.index');
     Route::get('/productos', ProductsIndex::class)->name('products.index');
+    
 });
 
 // Ruta para el Registro
