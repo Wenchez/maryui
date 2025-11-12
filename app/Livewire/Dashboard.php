@@ -22,6 +22,22 @@ class Dashboard extends Component
         ]
     ];
 
+    public array $incomeChart = [
+        'type' => 'line',
+        'data' => [
+            'labels' => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
+            'datasets' => [
+                [
+                    'label' => 'Ingresos Mensuales',
+                    'data' => [65, 59, 80, 81, 56, 55, 40],
+                    'fill' => false,
+                    'borderColor' => 'rgb(75, 192, 192)',
+                    'tension' => 0.1
+                ]
+            ]
+        ]
+    ];
+
     public function render()
     {
         return view('livewire.dashboard');

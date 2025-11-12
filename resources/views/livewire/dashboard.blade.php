@@ -1,9 +1,9 @@
-<div class="p-6 space-y-6  min-h-screen text-gray-900">
+<div class="p-6 space-y-6  min-h-screen">
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
         <div>
-            <h1 class="text-4xl font-extrabold text-gray-900">Dashboard</h1>
-            <p class="text-gray-600 mt-1">Bienvenido a Ximenabags</p>
+            <h1 class="text-4xl font-extrabold">Dashboard</h1>
+            <p class="mt-1">Bienvenido a Ximenabags</p>
         </div>
         <div class="flex items-center space-x-3">
             <button class="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition">Nuevo Pedido</button>
@@ -53,28 +53,20 @@
 
     <!-- Main charts area -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition">
-            <h2 class="text-lg font-semibold mb-4 text-gray-900">Ingresos</h2>
-            <!-- Chart placeholder -->
-            <div class="h-48 bg-gradient-to-b from-emerald-50 to-emerald-100 rounded-md flex items-end">
-                <div class="w-full h-full p-4">
-                    <!-- simple sparkline svg placeholder -->
-                    <svg class="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                        <polyline fill="none" stroke="#059669" stroke-width="4" points="0,12 10,6 20,8 30,9 40,12 50,6 60,14 70,11 80,8 90,4 100,12" />
-                    </svg>
-                </div>
-            </div>
+        <div class="lg:col-span-2 bg-white rounded-lg border border-gray-200 p-8 shadow-md flex flex-col justify-center items-center min-h-[420px]">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 w-full text-center">Ingresos</h2>
+            <x-chart wire:model="incomeChart" class="w-full h-[350px]" />
         </div>
 
         <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold text-gray-900">Categorías</h2>
+                <h2 class="text-2xl font-bold text-gray-900 w-full text-center">Categorías</h2>
                 <div class="flex gap-2">
                     <x-button label="Aleatorizar" wire:click="randomizeChart" icon="o-arrow-path" class="btn-sm btn-ghost" spinner />
                     <x-button label="Cambiar" wire:click="switchChartType" icon="o-arrows-right-left" class="btn-sm btn-ghost" spinner />
                 </div>
             </div>
-            <x-chart wire:model="categoryChart" class="h-64" />
+            <x-chart wire:model="categoryChart" class="w-full h-[350px]" />
         </div>
     </div>
 
@@ -88,9 +80,9 @@
             <div class="space-y-4">
                 @php
                     $customers = [
-                        ['name' => 'Ocie Swift', 'country' => 'Brasil', 'value' => '$30,589.00'],
-                        ['name' => 'Baron Considine', 'country' => 'Brasil', 'value' => '$23,015.00'],
-                        ['name' => 'Mr. Tito Fadel', 'country' => 'Brasil', 'value' => '$20,744.00'],
+                        ['name' => 'Carla Medina', 'country' => 'Constitucion', 'value' => '$30,589.00'],
+                        ['name' => 'Diego Cepeda', 'country' => 'La Paz', 'value' => '$23,015.00'],
+                        ['name' => 'Diego Peñuelas', 'country' => 'Constitucion', 'value' => '$20,744.00'],
                     ];
                 @endphp
                 @foreach ($customers as $c)
