@@ -118,7 +118,7 @@
         </section>
 
         <!-- Ofertas especiales -->
-        <section class="bg-amber-50 p-6 rounded-lg">
+        <section class=" p-6 rounded-lg">
             <h2 class="text-2xl font-semibold mb-2">Ofertas especiales</h2>
             <p class="text-sm text-gray-700 mb-4">Descuentos por tiempo limitado en selecciones exclusivas.</p>
             <div class="grid grid-cols-1 gap-3">
