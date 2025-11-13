@@ -17,10 +17,10 @@
 
         @php
             $slides = [
-                ['image' => '/photos/WhatsApp Image 2025-11-11 at 11.01.44 PM (2).jpeg'],
-                ['image' => '/photos/WhatsApp Image 2025-11-11 at 11.01.44 PM.jpeg'],
-                ['image' => '/photos/WhatsApp Image 2025-11-11 at 11.01.44 PM (1).jpeg'],
-                ['image' => '/photos/WhatsApp Image 2025-11-12 at 12.38.51 AM.jpeg'],
+                ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 11.01.44 PM (2).jpeg'],
+                ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 11.01.44 PM.jpeg'],
+                ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 11.01.44 PM (1).jpeg'],
+                ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-12 at 12.38.51 AM.jpeg'],
             ];
         @endphp
 
@@ -60,14 +60,14 @@
             
             <!-- Colección Primavera -->
             <div class="mb-8">
-                <h3 class="text-xl font-semibold mb-3">Colecciones Femaninas</h3>
+                <h3 class="text-xl font-semibold mb-3">Colecciones Femeninas</h3>
                 <p class="text-sm text-gray-600 mb-4">Colores vibrantes y diseños frescos para la temporada.</p>
                 @php
                     $slidesPrimavera = [
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (5).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM.jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (2).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (3).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (5).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM.jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM (2).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (3).jpeg'],
                     ];
                 @endphp
                 <x-carousel :slides="$slidesPrimavera" class="h-90!"/>
@@ -79,9 +79,9 @@
                 <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.20 PM.jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (4).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (3).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.20 PM.jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM (4).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM (3).jpeg'],
                     ];
                 @endphp
                 <x-carousel :slides="$slidesClasicos" />
@@ -93,9 +93,9 @@
                 <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (2).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 3.55.19 PM (1).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (2).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM (2).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM (1).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (2).jpeg'],
                     ];
                 @endphp
                 <x-carousel :slides="$slidesClasicos" />
@@ -107,9 +107,9 @@
                 <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM.jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (4).jpeg'],
-                        ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (1).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM.jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (4).jpeg'],
+                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (1).jpeg'],
                     ];
                 @endphp
                 <x-carousel :slides="$slidesClasicos" />
