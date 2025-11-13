@@ -59,8 +59,8 @@ class Product extends Model
             $imagePath = $data['product_image']->storeAs('products', $filename, 'public');
         }
 
-        $data['product_image'] = $imagePath ?? 'products/default.jpeg';
-        
+        $data['product_image'] = $imagePath ?? 'products/default.png';
+
         return self::create([
             'brand_id' => $data['brand_id'],
             'product_type_id' => $data['product_type_id'],
@@ -148,25 +148,35 @@ class Product extends Model
 
     public function getGenderLabelAttribute()
     {
-        return match($this->product_gender) {
+        return match ($this->product_gender) {
             'male' => 'Masculino',
             'female' => 'Femenino',
             'unisex' => 'Unisex',
             default => 'Unisex',
         };
     }
-    
+
     public function getProductImageUrlAttribute()
     {
         if ($this->product_image) {
             return asset('storage/' . $this->product_image);
         }
-        return asset('storage/app/public/products/default.jpeg');
+        return asset('storage/app/public/products/default.png');
+    }
+
+    public function getProductImagePathAttribute()
+    {
+        // Devuelve solo la ruta relativa dentro de storage
+        return 'storage/' . $this->product_image ?? 'storage/app/public/products/default.png';
     }
 
     protected static function handleImageUpdate($product, $newImage, $newName = null)
     {
-        if ($product->product_image && Storage::disk('public')->exists($product->product_image)) {
+        if (
+            $product->product_image &&
+            $product->product_image !== 'products/default.png' &&
+            Storage::disk('public')->exists($product->product_image)
+        ) {
             Storage::disk('public')->delete($product->product_image);
         }
 

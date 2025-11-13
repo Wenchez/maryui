@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'product_stock' => $faker->numberBetween(5, 50),
                 'product_price' => $faker->randomFloat(2, 50, 500),
                 'product_gender' => $faker->randomElement(['male', 'female', 'unisex']),
-                'product_image' => null, // Esto hará que use default.jpeg
+                'product_image' => null, // Esto hará que use default.png
                 'product_date' => now()->toDateString(),
             ]);
         }
