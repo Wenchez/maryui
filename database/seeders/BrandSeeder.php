@@ -16,7 +16,7 @@ class BrandSeeder extends Seeder
     public function run(): void
     {
         Brand::create([
-            'brand_name' => 'Kelvin Klain',
+            'brand_name' => 'Calvin Klein',
             'brand_description' => 'Marca de moda reconocida a nivel mundial',
         ]);
         Brand::create([
@@ -33,6 +33,14 @@ class BrandSeeder extends Seeder
         ]);
         Brand::create([
             'brand_name' => 'Karl Lagerfeld',
+            'brand_description' => 'Marca de moda reconocida a nivel mundial',
+        ]);
+        Brand::create([
+            'brand_name' => 'Reebok',
+            'brand_description' => 'Marca de moda reconocida a nivel mundial',
+        ]);
+        Brand::create([
+            'brand_name' => 'Steve Madden',
             'brand_description' => 'Marca de moda reconocida a nivel mundial',
         ]);
     }

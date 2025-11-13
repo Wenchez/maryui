@@ -28,12 +28,20 @@ class ProductTypeSeeder extends Seeder
             'product_type_description' => 'Mochila',
         ]);
         ProductType::create([
-            'product_type_name' => 'Perfume',
+            'product_type_name' => 'Crossbody',
             'product_type_description' => 'Perfume',
         ]);
         ProductType::create([
             'product_type_name' => 'Tenis',
             'product_type_description' => 'Prenda de calzado',
+        ]);
+        ProductType::create([
+            'product_type_name' => 'Sudadera',
+            'product_type_description' => 'Prenda usada en la parte superior del cuerpo',
+        ]);
+        ProductType::create([
+            'product_type_name' => 'Set',
+            'product_type_description' => 'Conjunto de prendas',
         ]);
     }
 }
