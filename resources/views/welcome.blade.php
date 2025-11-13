@@ -70,7 +70,7 @@
                         ['image' => '/photos/WhatsApp Image 2025-11-11 at 10.40.43 PM (3).jpeg'],
                     ];
                 @endphp
-                <x-carousel :slides="$slidesPrimavera" />
+                <x-carousel :slides="$slidesPrimavera" class="h-90!"/>
             </div>
 
             <!-- Colección Clásicos -->
@@ -150,13 +150,7 @@
 
         <!-- Newsletter / Footer pequeño -->
         <section class="bg-gray-50 p-6 rounded-lg">
-            <h3 class="font-semibold mb-2">Suscríbete para ofertas</h3>
-            <form class="flex flex-col sm:flex-row gap-2" action="#" method="POST">
-                <input aria-label="email" name="email" type="email" placeholder="Tu correo" class="flex-1 px-4 py-2 border rounded-md" />
-                <button type="submit" class="px-4 py-2 bg-emerald-600 text-white rounded-md">Suscribirme</button>
-            </form>
-
-            <footer class="mt-6 text-sm text-gray-500 text-center">© {{ date('Y') }} Ximenabags — Hecho con cariño</footer>
+            <footer class="text-sm text-gray-500 text-center">© {{ date('Y') }} Ximenabags — Hecho con cariño</footer>
         </section>
     </main>
 </x-layouts.app>
