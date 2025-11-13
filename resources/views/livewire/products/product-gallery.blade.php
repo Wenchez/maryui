@@ -17,6 +17,12 @@
                                 title="Editar producto"
                                 wire:click="$dispatch('openEditProductModal', { productId: {{ $product->product_id }} })"
                             />
+                            <x-button
+                                icon="o-trash"
+                                class="btn-circle btn-sm"
+                                title="Eliminar producto"
+                                wire:click.prevent="deleteProduct({{ $product->product_id }})"
+                            />
                         </x-slot:menu>
 
 
