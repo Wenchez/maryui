@@ -13,8 +13,8 @@ class ProductEditModal extends Component
     use WithFileUploads;
 
     public $showModal = false;
-
-    public $productId;
+    
+    public $productId = null;
 
     public $brand_id;
     public $product_type_id;
@@ -23,11 +23,12 @@ class ProductEditModal extends Component
     public $product_price;
     public $product_gender;
     public $product_image;
+    public $current_image_url;
     public $product_availability_status;
 
     public $brands = [];
     public $types = [];
-    
+
     protected $listeners = ['editModal' => 'open'];
 
     protected $rules = [
@@ -43,13 +44,18 @@ class ProductEditModal extends Component
 
     public function mount()
     {
+        $this->current_image_url = asset('storage/products/default.png');
         $this->brands = Brand::all();
         $this->types = ProductType::all();
     }
 
     public function open($productId)
     {
+        $this->resetValidation();
+
         $product = Product::findOrFail($productId);
+
+        $imagePath = $product->product_image_path;
 
         $this->productId = $product->product_id;
         $this->brand_id = $product->brand_id;
@@ -59,9 +65,27 @@ class ProductEditModal extends Component
         $this->product_price = $product->product_price;
         $this->product_gender = $product->product_gender;
         $this->product_availability_status = $product->product_availability_status;
-        $this->product_image = $product->product_image;
-        
+        $this->current_image_url = asset($imagePath);
+
+        $this->product_image = null;
         $this->showModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->resetValidation();
+        $this->reset([
+            'showModal',
+            'productId',
+            'brand_id',
+            'product_type_id',
+            'product_name',
+            'product_stock',
+            'product_price',
+            'product_gender',
+            'product_availability_status',
+            'product_image',
+        ]);
     }
 
     public function update()

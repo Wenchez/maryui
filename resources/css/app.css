@@ -40,3 +40,8 @@
 .mary-table-pagination button {
     @apply cursor-pointer
 }
+
+/* Sobreescribe el contenedor del título en cards MaryUI */
+.card .grow-1 {
+    min-width: 0 !important;
+}

@@ -23,7 +23,7 @@
                         {{-- Contenido del producto --}}
                         <div class="flex flex-col items-center">
                          <img 
-                            src="{{ $product->product_image ? asset('build/storage/products/' . $product->product_image) : asset('build/storage/products/default.jpeg') }}"
+                            src="{{ $product->product_image ? asset('build/storage/products/' . $product->product_image) : asset('build/storage/products/default.png') }}"
                             alt="{{ $product->product_name }}"
                             class="w-40 h-40 object-cover rounded-lg mb-3"
                         />

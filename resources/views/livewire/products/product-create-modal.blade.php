@@ -13,9 +13,9 @@
 
                     <div class="flex items-center justify-center w-full md:w-auto flex-1 md:flex-none">
                         <x-file wire:model="product_image" accept="image/*" label="Foto" crop-after-change>
-    <img src="{{ $product_image ? $product_image->temporaryUrl() : asset('build/storage/products/default.jpeg') }}"
-        class="h-90 w-90 rounded-xl object-cover border" />
-</x-file>
+                            <img src="{{ $product_image ? $product_image->temporaryUrl() : asset('storage/products/default.png') }}"
+                                class="h-90 w-90 rounded-xl object-cover border" />
+                        </x-file>
                     </div>
 
                     <div class="flex flex-col gap-1 w-full flex-1">
