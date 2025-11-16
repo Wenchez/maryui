@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id('sale_id');
             $table->dateTime('sale_date');
+            $table->string('sale_reference', 20)->unique();
             $table->unsignedInteger('user_id')->nullable();
             $table->decimal('sale_subtotal', 10, 2)->default(0.00);
             $table->decimal('sale_tax', 10, 2)->default(0.00);

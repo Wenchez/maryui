@@ -96,4 +96,28 @@ class Sale extends Model
     {
         return '$' . number_format($this->sale_total, 2);
     }
+
+    protected static function booted()
+    {
+        static::creating(function ($sale) {
+            $sale->sale_reference = self::generateReference();
+        });
+    }
+
+    public static function generateReference()
+    {
+        $prefix = 'XB';
+        $datePart = now()->format('dmY');
+
+        $lastSale = self::whereDate('sale_date', now()->toDateString())
+            ->orderBy('sale_id', 'desc')
+            ->first();
+
+        $nextNumber = 1;
+        if ($lastSale && preg_match('/(\d{4})$/', $lastSale->sale_reference, $matches)) {
+            $nextNumber = (int)$matches[1] + 1;
+        }
+
+        return sprintf('%s-%s-%04d', $prefix, $datePart, $nextNumber);
+    }
 }
