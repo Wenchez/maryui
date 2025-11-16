@@ -4,9 +4,12 @@ namespace App\Livewire\Sales;
 
 use Livewire\Component;
 use App\Models\Product;
+use Mary\Traits\Toast;
 
 class SaleDetailList extends Component
 {
+    use Toast;
+
     public array $saleDetails = [];
 
     protected $listeners = ['sale-details-updated' => 'setDetails'];
@@ -27,7 +30,12 @@ class SaleDetailList extends Component
         $stock = Product::find($productId)?->product_stock ?? 0;
         if ($quantity > $stock) {
             $quantity = $stock;
-            $this->dispatch('notify', 'No hay suficiente stock disponible.');
+            $this->error(
+                'No hay suficiente stock.',
+                'Stock insuficiente',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
         }
 
         $this->saleDetails[$productId]['quantity'] = $quantity;

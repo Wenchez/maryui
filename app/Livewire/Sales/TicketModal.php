@@ -5,9 +5,12 @@ namespace App\Livewire\Sales;
 use Livewire\Component;
 use App\Models\Sale;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Mary\Traits\Toast;
 
 class TicketModal extends Component
 {
+    use Toast;
+
     public $showModal = false;
     public $sale;
 
@@ -22,7 +25,11 @@ class TicketModal extends Component
     public function downloadPdf()
     {
         if (!$this->sale) {
-            $this->dispatch('notify', 'No hay venta cargada.');
+            $this->success(
+                'No hay venta cargada.',
+                'Error inesperado',
+                position: 'toast-bottom toast-end'
+            );
             return;
         }
 

@@ -6,9 +6,12 @@ use Livewire\Component;
 use App\Models\Sale;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Mary\Traits\Toast; 
 
 class SaleSummary extends Component
 {
+    use Toast;
+
     public float $subtotal = 0;
     public float $tax = 0;
     public float $total = 0;
@@ -29,18 +32,23 @@ class SaleSummary extends Component
     public function cancelSale()
     {
         $this->dispatch('clear-sale');
-        $this->dispatch('notify', 'Venta cancelada.');
+        $this->success(
+            'Venta cancelada correctamente',
+            'Operación revertida',
+            position: 'toast-bottom toast-end',
+            timeout: 2500
+        );
     }
 
     public function processSale()
     {
         if (empty($this->saleDetails)) {
-            $this->dispatch('notify', 'No hay productos para procesar.');
+            $this->error('No hay productos para procesar.', 'Error');
             return;
         }
 
         if (!auth()->check()) {
-            $this->dispatch('notify', 'Debes iniciar sesión para procesar la venta.');
+            $this->error('Debes iniciar sesión.', 'Acceso restringido');
             return;
         }
 
@@ -70,13 +78,22 @@ class SaleSummary extends Component
                 return $sale;
             });
 
-            $this->dispatch('notify', 'Venta procesada correctamente.');
+            $this->success(
+                'Venta procesada correctamente.',
+                'Éxito',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
             $this->dispatch('clear-sale');
             $this->dispatch('show-ticket', saleId: $sale->sale_id);
 
             $this->dispatch('sale-processed'); 
         } catch (\Throwable $e) {
-            $this->dispatch('notify', 'Error al procesar la venta.');
+            $this->error(
+                'Error al procesar la venta.',
+                'Error inesperado',
+                position: 'toast-bottom toast-end'
+            );
         }
     }
 

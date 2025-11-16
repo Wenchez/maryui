@@ -52,6 +52,7 @@ class ProductsSaleGrid extends Component
         return Product::query()
             ->where('product_availability_status', 'available')
             ->where('product_stock_status', 'inStock')
+            ->where('product_stock', '>', 0)
             ->when($search, fn($q, $s) => $q->where('product_name', 'like', "%{$s}%"))
             ->when($brands, fn($q, $b) => $q->whereIn('brand_id', $b))
             ->when($types, fn($q, $t) => $q->whereIn('product_type_id', $t))
