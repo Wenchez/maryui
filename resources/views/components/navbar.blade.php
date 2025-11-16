@@ -1,4 +1,4 @@
-<nav class="sticky top-0 z-50 bg-base-100 shadow px-4 py-2 flex items-center justify-between flex-wrap">
+<nav class="sticky top-0 z-50 bg-base-100 shadow px-4 flex items-center justify-between flex-wrap">
     <div class="flex items-center gap-5">
         <label for="main-drawer" class="lg:hidden mr-3 cursor-pointer">
             <x-icon name="o-bars-3" class="w-6 h-6" />
@@ -21,7 +21,7 @@
             </x-menu>
         </div>
 
-        <x-theme-toggle class="btn btn-circle btn-ghost" darkTheme="coffee" lightTheme="caramellatte" />
+        <x-theme-toggle class="btn btn-circle btn-ghost" darkTheme="coffee" lightTheme="valentine" />
 
         <div class="hidden lg:flex items-center gap-2">
             @auth

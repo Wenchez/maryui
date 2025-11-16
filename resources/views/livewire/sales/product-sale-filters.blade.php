@@ -35,6 +35,6 @@
         @endforeach
     </x-dropdown>
 
-    <x-button tooltip-bottom="Limpiar filtros" wire:click="clearFilters" icon="o-x-mark"
+    <x-button tooltip="Limpiar filtros" wire:click="clearFilters" icon="o-x-mark"
         class="font-bold btn-circle btn-error" />
 </div>

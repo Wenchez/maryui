@@ -1,7 +1,7 @@
 <div class="flex flex-col h-full bg-base-200">
 
     <!-- Header del sidebar -->
-    <div class="sticky top-0 px-4 py-3 flex items-center justify-between">
+    <div class="sticky top-0 px-4 flex items-center justify-between">
         <div class="text-xl font-bold">Ximenabags</div>
         <label for="main-drawer" class="cursor-pointer btn btn-ghost btn-circle">
             <x-icon name="o-x-mark" class="w-6 h-6" />

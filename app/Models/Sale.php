@@ -21,6 +21,10 @@ class Sale extends Model
         'sale_total',
     ];
 
+    protected $casts = [
+        'sale_date' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
@@ -29,6 +33,21 @@ class Sale extends Model
     public function details()
     {
         return $this->hasMany(SaleDetail::class, 'sale_id', 'sale_id');
+    }
+
+    public function getSaleSubtotalAttribute(): float
+    {
+        return round($this->details->sum(fn($d) => $d->line_total), 2);
+    }
+
+    public function getSaleTaxAttribute(): float
+    {
+        return round($this->sale_subtotal * 0.16, 2);
+    }
+
+    public function getSaleTotalAttribute(): float
+    {
+        return round($this->sale_subtotal + $this->sale_tax, 2);
     }
 
     public function calculateTotals()
@@ -95,5 +114,29 @@ class Sale extends Model
     public function getFormattedTotalAttribute()
     {
         return '$' . number_format($this->sale_total, 2);
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($sale) {
+            $sale->sale_reference = self::generateReference();
+        });
+    }
+
+    public static function generateReference()
+    {
+        $prefix = 'XB';
+        $datePart = now()->format('dmY');
+
+        $lastSale = self::whereDate('sale_date', now()->toDateString())
+            ->orderBy('sale_id', 'desc')
+            ->first();
+
+        $nextNumber = 1;
+        if ($lastSale && preg_match('/(\d{4})$/', $lastSale->sale_reference, $matches)) {
+            $nextNumber = (int)$matches[1] + 1;
+        }
+
+        return sprintf('%s-%s-%04d', $prefix, $datePart, $nextNumber);
     }
 }

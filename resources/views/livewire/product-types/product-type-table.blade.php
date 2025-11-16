@@ -1,5 +1,5 @@
 <div>
-    <x-card title="Categorías" shadow separator class="border-5 shadow rounded-xl">
+    <x-card title="Categorías" shadow separator class="border-5 shadow rounded-xl bg-base-200">
         <x-slot:menu>
             <x-button icon="o-plus" wire:click.prevent="createProductType" tooltip="Agregar nueva categoría"
                 class="btn-success btn-circle" />

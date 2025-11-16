@@ -88,7 +88,7 @@
                 @foreach ($customers as $c)
                     <div class="flex items-center justify-between border-b border-gray-100 pb-3 last:border-b-0">
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-sm">{{ substr($c['name'], 0, 1) }}</div>
+                            <div class="w-10 h-10 rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-sm">{{ substr($c['name'], 0, 1) }}</div>
                             <div>
                                 <div class="font-medium text-gray-900">{{ $c['name'] }}</div>
                                 <div class="text-sm text-gray-500">{{ $c['country'] }}</div>

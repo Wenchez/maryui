@@ -24,7 +24,7 @@
             ];
         @endphp
 
-        <x-carousel :slides="$slides" />
+        <x-carousel :slides="$slides" class="h-100!"/>
 
         <!-- Características -->
         <section class="rounded-lg p-6">
@@ -70,7 +70,7 @@
                         ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (3).jpeg'],
                     ];
                 @endphp
-                <x-carousel :slides="$slidesPrimavera" class="h-90!"/>
+                <x-carousel :slides="$slidesPrimavera" class="h-100!"/>
             </div>
 
             <!-- Colección Clásicos -->
@@ -84,7 +84,7 @@
                         ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 3.55.19 PM (3).jpeg'],
                     ];
                 @endphp
-                <x-carousel :slides="$slidesClasicos" />
+                <x-carousel :slides="$slidesClasicos" class="h-100!"/>
             </div>
 
             <!-- Colección Bolsos -->
@@ -98,7 +98,7 @@
                         ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (2).jpeg'],
                     ];
                 @endphp
-                <x-carousel :slides="$slidesClasicos" />
+                <x-carousel :slides="$slidesClasicos" class="h-100!"/>
             </div>
 
             <!-- Colección Accesorios -->
@@ -112,7 +112,7 @@
                         ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (1).jpeg'],
                     ];
                 @endphp
-                <x-carousel :slides="$slidesClasicos" />
+                <x-carousel :slides="$slidesClasicos" class="h-100!"/>
             </div>
 
         </section>

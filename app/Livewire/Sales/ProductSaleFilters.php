@@ -5,9 +5,12 @@ namespace App\Livewire\Sales;
 use Livewire\Component;
 use App\Models\Brand;
 use App\Models\ProductType;
+use Mary\Traits\Toast;
 
 class ProductSaleFilters extends Component
 {
+    use Toast;
+
     public array $selectedBrands = [];
     public array $selectedTypes = [];
     public array $selectedGenders = [];
@@ -21,7 +24,7 @@ class ProductSaleFilters extends Component
     {
         $this->selectedBrands = array_map('strval', $filters['brands'] ?? []);
         $this->selectedTypes = array_map('strval', $filters['types'] ?? []);
-        $this->selectedGenders = array_map('strval', $filters['genders'] ?? []); 
+        $this->selectedGenders = array_map('strval', $filters['genders'] ?? []);
         $this->search = $filters['search'] ?? '';
 
         $this->availableBrands = Brand::orderBy('brand_name')->pluck('brand_name', 'brand_id')->toArray();
@@ -39,7 +42,7 @@ class ProductSaleFilters extends Component
     {
         $brands = array_map('intval', $this->selectedBrands);
         $types = array_map('intval', $this->selectedTypes);
-        
+
         $genders = $this->selectedGenders;
 
         $this->dispatch('filters-updated', [
@@ -50,17 +53,59 @@ class ProductSaleFilters extends Component
         ])->to(ProductsSaleGrid::class);
     }
 
-    public function clearFilters() {
+    public function clearFilters()
+    {
         $this->selectedBrands = [];
         $this->selectedTypes = [];
         $this->selectedGenders = [];
         $this->search = '';
         $this->sendFilters();
+
+        $this->success(
+            'Filtros limpiados.',
+            'Mostrando todos los productos',
+            position: 'toast-bottom toast-end',
+            timeout: 2500
+        );
     }
-    public function clearBrands() { $this->selectedBrands = []; $this->sendFilters(); }
-    public function clearTypes() { $this->selectedTypes = []; $this->sendFilters(); }
-    public function clearGenders() { $this->selectedGenders = []; $this->sendFilters(); }
-    public function clearSearch() { $this->search = ''; $this->sendFilters(); }
+    public function clearBrands()
+    {
+        $this->selectedBrands = [];
+        $this->success(
+            'Filtro de marca vacios.',
+            'Mostrando todas las marcas',
+            position: 'toast-bottom toast-end',
+            timeout: 2500
+        );
+        $this->sendFilters();
+    }
+    public function clearTypes()
+    {
+        $this->selectedTypes = [];
+        $this->success(
+                'Filtro de categoría vacios.',
+                'Mostrando todas las categorías',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
+        $this->sendFilters();
+    }
+    public function clearGenders()
+    {
+        $this->selectedGenders = [];
+        $this->success(
+                'Filtros por genero vacios.',
+                'Mostrando productos de todos los géneros',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
+        $this->sendFilters();
+    }
+    public function clearSearch()
+    {
+        $this->search = '';
+        $this->sendFilters();
+    }
 
     public function render()
     {

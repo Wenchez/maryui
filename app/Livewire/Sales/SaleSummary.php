@@ -4,12 +4,14 @@ namespace App\Livewire\Sales;
 
 use Livewire\Component;
 use App\Models\Sale;
-use App\Models\SaleDetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Mary\Traits\Toast; 
 
 class SaleSummary extends Component
 {
+    use Toast;
+
     public float $subtotal = 0;
     public float $tax = 0;
     public float $total = 0;
@@ -30,30 +32,32 @@ class SaleSummary extends Component
     public function cancelSale()
     {
         $this->dispatch('clear-sale');
-        $this->dispatch('notify', 'Venta cancelada.');
+        $this->success(
+            'Venta cancelada correctamente',
+            'Operación revertida',
+            position: 'toast-bottom toast-end',
+            timeout: 2500
+        );
     }
 
     public function processSale()
     {
         if (empty($this->saleDetails)) {
-            $this->dispatch('notify', 'No hay productos para procesar.');
+            $this->error('No hay productos para procesar.', 'Error');
             return;
         }
 
         if (!auth()->check()) {
-            $this->dispatch('notify', 'Debes iniciar sesión para procesar la venta.');
+            $this->error('Debes iniciar sesión.', 'Acceso restringido');
             return;
         }
 
 
         try {
-            DB::transaction(function () {
+            $sale = DB::transaction(function () {
                 $sale = Sale::create([
                     'sale_date' => now(),
-                    'user_id' => auth()->id() ?? throw new \Exception('Usuario no autenticado'),
-                    'sale_subtotal' => $this->subtotal,
-                    'sale_tax' => $this->tax,
-                    'sale_total' => $this->total,
+                    'user_id' => auth()->id(),
                 ]);
 
                 foreach ($this->saleDetails as $item) {
@@ -65,15 +69,31 @@ class SaleSummary extends Component
 
                     $product = Product::find($item['product_id']);
                     if ($product) {
-                        $product->decrement('product_stock', $item['quantity']);
+                        $product->product_stock -= $item['quantity'];
+                        $product->save(); // Actualiza el stock si es necesario
                     }
                 }
+
+                $sale->refreshTotals(); // calcula subtotal, iva, total
+                return $sale;
             });
 
-            $this->dispatch('notify', 'Venta procesada correctamente.');
+            $this->success(
+                'Venta procesada correctamente.',
+                'Éxito',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
             $this->dispatch('clear-sale');
+            $this->dispatch('show-ticket', saleId: $sale->sale_id);
+
+            $this->dispatch('sale-processed'); 
         } catch (\Throwable $e) {
-            $this->dispatch('notify', 'Error al procesar la venta.');
+            $this->error(
+                'Error al procesar la venta.',
+                'Error inesperado',
+                position: 'toast-bottom toast-end'
+            );
         }
     }
 

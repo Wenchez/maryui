@@ -19,17 +19,11 @@
 
     {{-- Botones --}}
     <div class="flex gap-2 mt-4">
-        <x-button 
-            class="flex-1 btn-ghost text-red-500"
-            wire:click="cancelSale"
-        >
+        <x-button class="flex-1 btn-ghost text-red-500" wire:click="cancelSale">
             Cancelar
         </x-button>
 
-        <x-button 
-            class="flex-1 btn-primary"
-            wire:click="processSale"
-        >
+        <x-button class="flex-1 btn-primary" wire:click="processSale">
             Procesar Venta
         </x-button>
     </div>
