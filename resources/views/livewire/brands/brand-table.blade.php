@@ -1,5 +1,5 @@
 <div>
-    <x-card title="Marcas" shadow separator class="border-5 shadow rounded-xl">
+    <x-card title="Marcas" shadow separator class="border-5 shadow rounded-xl bg-base-200">
         <x-slot:menu>
             <x-button icon="o-plus" wire:click.prevent="createBrand" tooltip="Agregar nueva marca"
                 class="btn-success btn-circle" />

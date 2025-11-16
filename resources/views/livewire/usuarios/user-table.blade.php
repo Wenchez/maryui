@@ -1,5 +1,5 @@
 <div>
-    <x-card title="Usuarios" shadow separator class="border-5 shadow rounded-xl">
+    <x-card title="Usuarios" shadow separator class="border-5 shadow rounded-xl bg-base-200">
 
         <x-table :headers="$headers" :rows="$users" :sort-by="$sortBy" with-pagination per-page="perPage" :per-page-values="[5,10,20]">
             @scope('cell_role', $user)
