@@ -23,22 +23,21 @@ class SalePanel extends Component
     {
         $productId = $productData['product_id'];
 
-        if (isset($this->saleDetails[$productId])) {
-            $this->saleDetails[$productId]['quantity']++;
-        } else {
+        if (!isset($this->saleDetails[$productId])) {
             $this->saleDetails[$productId] = [
                 'product_id' => $productId,
                 'product_name' => $productData['product_name'],
                 'product_image' => $productData['product_image'] ?? null,
                 'unit_price' => $productData['product_price'],
                 'quantity' => 1,
-                'stock' => $productData['stock'] ?? 9999, // importante para validación
+                'stock' => $productData['stock'] ?? 9999,
             ];
-        }
 
-        $this->recalculateTotals();
-        $this->dispatch('sale-details-updated', $this->saleDetails);
+            $this->recalculateTotals();
+            $this->dispatch('sale-details-updated', $this->saleDetails);
+        }
     }
+
 
     public function updateQuantity($productId, $quantity)
     {

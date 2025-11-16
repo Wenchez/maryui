@@ -1,6 +1,5 @@
 <div class="hover:scale-105 transition-transform">
-    <x-card shadow class="border-2">
-
+    <x-card shadow>
         <x-slot:title>
             <div class="w-full min-w-0">
                 <span class="block w-full overflow-hidden whitespace-nowrap text-ellipsis text-base font-medium"
