@@ -14,12 +14,12 @@
             </x-slot:value>
 
             <x-slot:sub-value>
-                <div class="text-sm text-gray-500">
+                <div class="text-sm text-base-content/70">
                     ${{ number_format($detail['unit_price'], 2) }} c/u —
                     <span class="font-semibold">
                         ${{ number_format($detail['quantity'] * $detail['unit_price'], 2) }}
                     </span>
-                    <span class="text-xs text-gray-400">[Stock: {{ $detail['stock'] }}]</span>
+                    <span class="text-xs text-base-content/50">[Stock: {{ $detail['stock'] }}]</span>
                 </div>
             </x-slot:sub-value>
 
@@ -40,6 +40,6 @@
             </x-slot:actions>
         </x-list-item>
     @empty
-        <p class="text-gray-400 text-center py-4">No hay productos en la venta</p>
+        <p class="text-base-content text-center py-4">No hay productos en la venta</p>
     @endforelse
 </div>

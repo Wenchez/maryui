@@ -21,7 +21,7 @@
             </x-menu>
         </div>
 
-        <x-theme-toggle class="btn btn-circle btn-ghost" darkTheme="coffee" lightTheme="caramellatte" />
+        <x-theme-toggle class="btn btn-circle btn-ghost" darkTheme="coffee" lightTheme="valentine" />
 
         <div class="hidden lg:flex items-center gap-2">
             @auth
