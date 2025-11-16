@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         ]);
 
         // Algunos usuarios tipo cajero
-        User::factory()->count(10)->create([
+        User::factory()->count(2)->create([
             'role' => 'manager',
         ]);
     }
