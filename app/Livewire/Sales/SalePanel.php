@@ -4,9 +4,12 @@ namespace App\Livewire\Sales;
 
 use Livewire\Component;
 use App\Models\Product;
+use Mary\Traits\Toast;
 
 class SalePanel extends Component
 {
+    use Toast;
+
     public array $saleDetails = [];
     public float $subtotal = 0;
     public float $tax = 0;
@@ -33,8 +36,23 @@ class SalePanel extends Component
                 'stock' => $productData['stock'] ?? 9999,
             ];
 
+            $this->success(
+                'Producto agregado.',
+                'Lista actualizada',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
+
             $this->recalculateTotals();
             $this->dispatch('sale-details-updated', $this->saleDetails);
+        }
+        else {
+            $this->warning(
+                'El producto ya está en la lista de venta.',
+                'No es necesario agregarlo de nuevo',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
         }
     }
 
