@@ -44,7 +44,7 @@ class ReportService
     }
 
     /* ============================================================
-     * 2. GRÁFICO DE INGRESOS POR MES
+     * 2. GRÁFICOS
      * ============================================================ */
 
     public function getIncomeByMonth()
@@ -55,29 +55,6 @@ class ReportService
             ->pluck('total', 'month')
             ->toArray();
     }
-
-    /* ============================================================
-     * 3. VENTAS POR CATEGORÍA (Product Type)
-     * ============================================================ */
-
-    public function getSalesByCategory()
-    {
-        return ProductType::select(
-            'product_types.product_type_id',
-            'product_types.product_type_name',
-            DB::raw('SUM(sale_details.quantity) as total_sold')
-        )
-            ->join('products', 'product_types.product_type_id', '=', 'products.product_type_id')
-            ->join('sale_details', 'products.product_id', '=', 'sale_details.product_id')
-            ->groupBy('product_types.product_type_id', 'product_types.product_type_name')
-            ->orderByDesc('total_sold')
-            ->get();
-    }
-
-
-    /* ============================================================
-     * 4. TOP USUARIOS (mayor ventas total)
-     * ============================================================ */
 
     public function getTopUsers()
     {
@@ -95,10 +72,25 @@ class ReportService
             ->get();
     }
 
-
     /* ============================================================
-     * 5. TOP PRODUCTOS
+     * 3. LISTAS
      * ============================================================ */
+
+    public function getSalesByCategory($limit = 5)
+    {
+        return ProductType::select(
+            'product_types.product_type_id',
+            'product_types.product_type_name',
+            DB::raw('SUM(sale_details.quantity) as total_sold'),
+            DB::raw('SUM(sale_details.quantity * sale_details.unit_price) as revenue')
+        )
+            ->join('products', 'product_types.product_type_id', '=', 'products.product_type_id')
+            ->join('sale_details', 'products.product_id', '=', 'sale_details.product_id')
+            ->groupBy('product_types.product_type_id', 'product_types.product_type_name')
+            ->orderByDesc('total_sold')
+            ->limit($limit)
+            ->get();
+    }
 
     public function getTopProducts($limit = 5)
     {
@@ -114,6 +106,23 @@ class ReportService
                 'products.product_id',
                 'products.product_name'
             )
+            ->orderByDesc('total_sold')
+            ->limit($limit)
+            ->get();
+    }
+
+    public function getTopBrands($limit = 5)
+    {
+        return DB::table('brands as b')
+            ->join('products as p', 'b.brand_id', '=', 'p.brand_id')
+            ->join('sale_details as sd', 'p.product_id', '=', 'sd.product_id')
+            ->select(
+                'b.brand_id',
+                'b.brand_name',
+                DB::raw('SUM(sd.quantity) as total_sold'),
+                DB::raw('SUM(sd.quantity * sd.unit_price) as revenue')
+            )
+            ->groupBy('b.brand_id', 'b.brand_name')
             ->orderByDesc('total_sold')
             ->limit($limit)
             ->get();
