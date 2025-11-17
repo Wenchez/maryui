@@ -12,7 +12,6 @@
                 <x-menu-item title="Dashboard" icon="o-home" class="font-bold" :link="route('dashboard')" />
                 <x-menu-item title="Usuarios" icon="o-user-group" class="font-bold" :link="route('usuarios.index')" />
                 <x-menu-item title="Venta" icon="o-currency-dollar" class="font-bold" :link="route('sales.index')" />
-                <x-menu-item title="Reportes" icon="o-document-currency-dollar" class="font-bold" link="#" />
                 <x-dropdown label="Almacen" class="btn-ghost font-bold" icon="o-building-storefront">
                     <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
                     <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />

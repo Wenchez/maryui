@@ -13,7 +13,6 @@
         <x-menu-item title="Dashboard" icon="o-home" :link="route('dashboard')" />
         <x-menu-item title="Usuarios" icon="o-user-group" :link="route('usuarios.index')" />
         <x-menu-item title="Venta" icon="o-currency-dollar" :link="route('sales.index')" />
-        <x-menu-item title="Reportes" icon="o-document-currency-dollar" link="#" />
 
         <x-menu-sub title="Almacen" icon="o-building-storefront">
             <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
