@@ -4,9 +4,11 @@ namespace App\Livewire\Brands;
 
 use Livewire\Component;
 use App\Models\Brand;
+use Mary\Traits\Toast;
 
 class BrandDeleteModal extends Component
 {
+    use Toast;
     public $brandId;
     public $brandName;
     public $showModal = false;
@@ -28,6 +30,12 @@ class BrandDeleteModal extends Component
         try {
             Brand::deleteBrand($this->brandId);
             $this->showModal = false;
+            $this->success(
+                'Marca eliminada correctamente.',
+                position: 'toast-bottom toast-end',
+                css: 'bg-pink-500 text-base-100',
+                timeout: 2500
+            );
             $this->dispatch('brandUpdated');
             $this->errorMessage = null; // limpiar mensaje en caso de éxito
         } catch (\Exception $e) {
