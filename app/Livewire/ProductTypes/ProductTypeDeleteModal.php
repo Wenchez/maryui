@@ -4,9 +4,11 @@ namespace App\Livewire\ProductTypes;
 
 use Livewire\Component;
 use App\Models\ProductType;
+use Mary\Traits\Toast;
 
 class ProductTypeDeleteModal extends Component
 {
+    use Toast;
     public $product_typeId;
     public $product_typeName;
     public $showModal = false;
@@ -38,6 +40,14 @@ class ProductTypeDeleteModal extends Component
         } catch (\Exception $e) {
             $this->errorMessage = $e->getMessage(); // guardar mensaje de error
         }
+
+        $this->success(
+                'Categoria eliminada correctamente.',
+                position: 'toast-bottom toast-end',
+                css: 'bg-pink-500 text-base-100',
+                timeout: 2500
+        );
+
     }
 
     public function render()

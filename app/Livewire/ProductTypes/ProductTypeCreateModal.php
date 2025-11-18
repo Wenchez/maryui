@@ -4,9 +4,11 @@ namespace App\Livewire\ProductTypes;
 
 use Livewire\Component;
 use App\Models\ProductType;
+use Mary\Traits\Toast;
 
 class ProductTypeCreateModal extends Component
 {
+    use Toast;
     public $product_type_name;
     public $product_type_description;
     public $showModal = false;
@@ -36,6 +38,13 @@ class ProductTypeCreateModal extends Component
             'product_type_name' => $this->product_type_name,
             'product_type_description' => $this->product_type_description,
         ]);
+
+         $this->success(
+            'Categoria creada correctamente.',
+            position: 'toast-bottom toast-end',
+            css: 'bg-pink-500 text-base-100',
+            timeout: 2500
+        );
 
         $this->showModal = false;
         $this->dispatch('productTypeUpdated');
