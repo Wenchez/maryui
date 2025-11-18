@@ -4,9 +4,11 @@ namespace App\Livewire\Usuarios;
 
 use Livewire\Component;
 use App\Models\User;
+use Mary\Traits\Toast;
 
 class UserDeleteModal extends Component
 {
+    use Toast;
     public $userId;
     public $userName;
     public $showModal = false;
