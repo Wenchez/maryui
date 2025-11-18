@@ -46,6 +46,13 @@ class UserEditModal extends Component
             'role' => $this->role,
         ]);
 
+        $this->success(
+                'Usuario actualizado correctamente.',
+                position: 'toast-bottom toast-end',
+                css: 'bg-pink-500 text-base-100',
+                timeout: 2500
+        );
+
         $this->showModal = false;
         $this->dispatch('userUpdated');
     }
