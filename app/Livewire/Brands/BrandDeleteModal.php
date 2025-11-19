@@ -41,6 +41,7 @@ class BrandDeleteModal extends Component
             $this->errorMessage = $e->getMessage(); // guardar mensaje de error
             $this->error(
                 'Error al eliminar la marca: ',
+                $e->getMessage(),
                 position: 'toast-bottom toast-end',
                 timeout: 2500
             );
