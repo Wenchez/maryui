@@ -2,10 +2,15 @@
 
     <!-- Header del sidebar -->
     <div class="sticky top-0 px-4 flex items-center justify-between">
-        <div class="text-xl font-bold">Ximenabags</div>
-        <label for="main-drawer" class="cursor-pointer btn btn-ghost btn-circle">
-            <x-icon name="o-x-mark" class="w-6 h-6" />
+        <label for="main-drawer" class="lg:hidden mr-3 cursor-pointer">
+            <x-icon name="o-bars-3" class="w-6 h-6" />
         </label>
+
+        <x-button :link="route('dashboard')" class="btn btn-ghost btn-circle p-1 btn-xl">
+            <img src="{{ asset('favicon.svg') }}" alt="Logo">
+        </x-button>
+        
+        <div class="text-xl font-bold">Ximenabags</div>
     </div>
 
     <!-- Menú principal: ocupa el espacio disponible -->

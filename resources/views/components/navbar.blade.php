@@ -3,6 +3,11 @@
         <label for="main-drawer" class="lg:hidden mr-3 cursor-pointer">
             <x-icon name="o-bars-3" class="w-6 h-6" />
         </label>
+
+        <x-button :link="route('dashboard')" class="btn btn-ghost btn-circle p-1 btn-xl">
+            <img src="{{ asset('favicon.svg') }}" alt="Logo">
+        </x-button>
+        
         <div class="text-xl font-bold">Ximenabags</div>
     </div>
 
