@@ -7,9 +7,11 @@ use Livewire\WithFileUploads;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\ProductType;
+use Mary\Traits\Toast;
 
 class ProductCreateModal extends Component
 {
+    use Toast;
     use WithFileUploads;
 
     public $showModal = false;
@@ -64,6 +66,13 @@ class ProductCreateModal extends Component
         ]);
 
         $this->showModal = false;
+
+        $this->success(
+                'Producto creado correctamente!.',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+        );
+
         $this->dispatch('productUpdated');
     }
 

@@ -4,10 +4,11 @@ namespace App\Livewire\Brands;
 
 use Livewire\Component;
 use App\Models\Brand;
-
+use Mary\Traits\Toast;
 
 class BrandCreateModal extends Component
 {
+    use Toast;
     public $brand_name;
     public $brand_description;
     public $showModal = false;
@@ -37,6 +38,12 @@ class BrandCreateModal extends Component
             'brand_name' => $this->brand_name,
             'brand_description' => $this->brand_description,
         ]);
+
+        $this->success(
+                'Marca creada correctamente!.',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+        );
 
         $this->showModal = false;
         $this->dispatch('brandUpdated');

@@ -4,9 +4,11 @@ namespace App\Livewire\Usuarios;
 
 use Livewire\Component;
 use App\Models\User;
+use Mary\Traits\Toast;
 
 class UserDeleteModal extends Component
 {
+    use Toast;
     public $userId;
     public $userName;
     public $showModal = false;
@@ -26,6 +28,11 @@ class UserDeleteModal extends Component
     {
         if ($this->userId) {
             User::deleteUser($this->userId);
+            $this->success(
+                'Usuario eliminado correctamente.',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+        );
             $this->showModal = false;
             $this->dispatch('userUpdated');
         }

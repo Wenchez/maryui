@@ -4,9 +4,11 @@ namespace App\Livewire\Usuarios;
 
 use Livewire\Component;
 use App\Models\User;
+use Mary\Traits\Toast;
 
 class UserEditModal extends Component
 {
+    use Toast;
     public $userId;
     public $name;
     public $email;
@@ -45,6 +47,12 @@ class UserEditModal extends Component
             'email' => $this->email,
             'role' => $this->role,
         ]);
+
+        $this->success(
+                'Usuario actualizado correctamente.',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+        );
 
         $this->showModal = false;
         $this->dispatch('userUpdated');

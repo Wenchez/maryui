@@ -7,9 +7,11 @@ use Livewire\WithFileUploads;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\ProductType;
+use Mary\Traits\Toast;
 
 class ProductEditModal extends Component
 {
+    use Toast;
     use WithFileUploads;
 
     public $showModal = false;
@@ -108,7 +110,16 @@ class ProductEditModal extends Component
 
         Product::updateProduct($this->productId, $data);
 
+        $this->success(
+                'Producto actualizado correctamente!.',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+        );
+
+        $this->dispatch('productUpdated',$this->productId);
+
         $this->showModal = false;
+
     }
 
     public function render()
