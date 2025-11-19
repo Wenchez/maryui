@@ -10,15 +10,19 @@
 
     <!-- Menú principal: ocupa el espacio disponible -->
     <x-menu activate-by-route class="flex-1 overflow-y-auto px-2 py-3">
-        <x-menu-item title="Dashboard" icon="o-home" :link="route('dashboard')" />
-        <x-menu-item title="Usuarios" icon="o-user-group" :link="route('usuarios.index')" />
-        <x-menu-item title="Venta" icon="o-currency-dollar" :link="route('sales.index')" />
+        @auth
+            <x-menu-item title="Dashboard" icon="o-home" :link="route('dashboard')" />
+            <x-menu-item title="Venta" icon="o-currency-dollar" :link="route('sales.index')" />
+            @if (auth()->check() && auth()->user()->isManager())
+                <x-menu-item title="Usuarios" icon="o-user-group" :link="route('usuarios.index')" />
 
-        <x-menu-sub title="Almacen" icon="o-building-storefront">
-            <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
-            <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
-            <x-menu-item title="Categorías" icon="o-tag" :link="route('product-types.index')" />
-        </x-menu-sub>
+                <x-menu-sub title="Almacen" icon="o-building-storefront">
+                    <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
+                    <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
+                    <x-menu-item title="Categorías" icon="o-tag" :link="route('product-types.index')" />
+                </x-menu-sub>
+            @endif
+        @endauth
     </x-menu>
 
     <!-- Bloque inferior fijo: login / register -->

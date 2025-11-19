@@ -9,14 +9,24 @@
     <div class="flex items-center gap-2 flex-wrap justify-end w-auto lg:w-auto">
         <div class="hidden lg:flex items-center gap-4">
             <x-menu activate-by-route class="flex-row gap-4">
-                <x-menu-item title="Dashboard" icon="o-home" class="font-bold" :link="route('dashboard')" />
-                <x-menu-item title="Usuarios" icon="o-user-group" class="font-bold" :link="route('usuarios.index')" />
-                <x-menu-item title="Venta" icon="o-currency-dollar" class="font-bold" :link="route('sales.index')" />
-                <x-dropdown label="Almacen" class="btn-ghost font-bold" icon="o-building-storefront">
-                    <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
-                    <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
-                    <x-menu-item title="Categorías" icon="o-tag" :link="route('product-types.index')" />
-                </x-dropdown>
+                <div class="invisible">
+                    <x-dropdown label="The man who sold the world" class="btn-ghost font-bold"
+                        icon="o-eye-slash">
+                    </x-dropdown>
+                </div>
+                @auth
+                    <x-menu-item title="Dashboard" icon="o-home" class="font-bold" :link="route('dashboard')" />
+                    <x-menu-item title="Venta" icon="o-currency-dollar" class="font-bold" :link="route('sales.index')" />
+                    @if (auth()->check() && auth()->user()->isManager())
+                        <x-menu-item title="Usuarios" icon="o-user-group" class="font-bold" :link="route('usuarios.index')" />
+
+                        <x-dropdown label="Almacen" class="btn-ghost font-bold" icon="o-building-storefront">
+                            <x-menu-item title="Productos" icon="o-shopping-bag" :link="route('products.index')" />
+                            <x-menu-item title="Marcas" icon="o-percent-badge" :link="route('brands.index')" />
+                            <x-menu-item title="Categorías" icon="o-tag" :link="route('product-types.index')" />
+                        </x-dropdown>
+                    @endif
+                @endauth
             </x-menu>
         </div>
 
@@ -27,10 +37,10 @@
                 <span class="text-sm hidden sm:inline">Hola, {{ auth()->user()->name }}</span>
                 <livewire:auth.logout />
             @else
-                @if(Route::has('login'))
+                @if (Route::has('login'))
                     <a href="{{ route('login') }}" class="btn btn-primary">Ingresar</a>
                 @endif
-                @if(Route::has('register'))
+                @if (Route::has('register'))
                     <a href="{{ route('register') }}" class="btn btn-outline">Registrarse</a>
                 @endif
             @endauth
