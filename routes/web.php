@@ -12,12 +12,15 @@ use App\Livewire\Sales\Index as SalesIndex;
 
 Route::get('/', fn() => view('welcome'))->name('welcome');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
     Route::get('/marcas', BrandsIndex::class)->name('brands.index');
     Route::get('/categorias', ProductTypesIndex::class)->name('product-types.index');
     Route::get('/productos', ProductsIndex::class)->name('products.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/ventas', SalesIndex::class)->name('sales.index');
 });
 

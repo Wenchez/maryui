@@ -15,7 +15,7 @@
     <!-- slides track -->
     <div class="flex transition-transform duration-500 ease-out" style="transform: translateX(0%);">
         @foreach($slides as $s)
-            <div class="min-w-full flex-shrink-0">
+            <div class="min-w-full shrink-0">
                 <img src="{{ $s['image'] }}" alt="" class="w-full h-64 md:h-80 object-cover" loading="lazy">
             </div>
         @endforeach
