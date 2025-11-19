@@ -40,9 +40,8 @@ class BrandCreateModal extends Component
         ]);
 
         $this->success(
-                'Marca creada correctamente!',
+                'Marca creada correctamente!.',
                 position: 'toast-bottom toast-end',
-                css: 'bg-pink-500 text-base-100',
                 timeout: 2500
         );
 

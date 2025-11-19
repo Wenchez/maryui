@@ -84,6 +84,12 @@ class SalePanel extends Component
     {
         unset($this->saleDetails[$productId]);
         $this->recalculateTotals();
+        $this->success(
+                'Producto removido.',
+                'Lista actualizada',
+                position: 'toast-bottom toast-end',
+                timeout: 2500
+            );
         $this->dispatch('sale-details-updated', $this->saleDetails);
     }
 

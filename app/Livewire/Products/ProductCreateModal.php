@@ -68,9 +68,8 @@ class ProductCreateModal extends Component
         $this->showModal = false;
 
         $this->success(
-                'Producto creado correctamente.',
+                'Producto creado correctamente!.',
                 position: 'toast-bottom toast-end',
-                css: 'bg-pink-500 text-base-100',
                 timeout: 2500
         );
 

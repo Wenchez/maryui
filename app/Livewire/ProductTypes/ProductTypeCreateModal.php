@@ -40,9 +40,8 @@ class ProductTypeCreateModal extends Component
         ]);
 
          $this->success(
-            'Categoria creada correctamente.',
+            'Categoria creada correctamente!.',
             position: 'toast-bottom toast-end',
-            css: 'bg-pink-500 text-base-100',
             timeout: 2500
         );
 

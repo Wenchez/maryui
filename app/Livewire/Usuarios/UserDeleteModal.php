@@ -31,7 +31,6 @@ class UserDeleteModal extends Component
             $this->success(
                 'Usuario eliminado correctamente.',
                 position: 'toast-bottom toast-end',
-                css: 'bg-pink-500 text-base-100',
                 timeout: 2500
         );
             $this->showModal = false;
