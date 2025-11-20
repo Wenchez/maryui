@@ -12,17 +12,30 @@ use App\Livewire\Sales\Index as SalesIndex;
 
 Route::get('/', fn() => view('welcome'))->name('welcome');
 
-Route::middleware(['auth', 'role:manager'])->group(function () {
-    Route::get('/usuarios', UsuariosIndex::class)->name('usuarios.index');
-    Route::get('/marcas', BrandsIndex::class)->name('brands.index');
-    Route::get('/categorias', ProductTypesIndex::class)->name('product-types.index');
-    Route::get('/productos', ProductsIndex::class)->name('products.index');
-});
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/ventas', SalesIndex::class)->name('sales.index');
+
+    Route::prefix('usuarios')->name('usuarios.')->group(function () {
+        Route::get('/', UsuariosIndex::class)->name('index');
+    });
+
+    Route::prefix('marcas')->name('brands.')->group(function () {
+        Route::get('/', BrandsIndex::class)->name('index');
+    });
+
+    Route::prefix('categorias')->name('product-types.')->group(function () {
+        Route::get('/', ProductTypesIndex::class)->name('index');
+    });
+
+    Route::prefix('productos')->name('products.')->group(function () {
+        Route::get('/', ProductsIndex::class)->name('index');
+    });
+
+    Route::prefix('ventas')->name('sales.')->group(function () {
+        Route::get('/', SalesIndex::class)->name('index');
+    });
 });
+
 
 // Ruta para el Registro
 Route::get('/register', Register::class)->name('register');
