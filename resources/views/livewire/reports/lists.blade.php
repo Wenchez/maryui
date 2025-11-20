@@ -11,7 +11,7 @@
                     <div class="flex justify-between items-center gap-4 px-3 hover:bg-base-200 cursor-pointer py-2">
                         {{-- Avatar de texto --}}
                         <x-avatar placeholder="{{ strtoupper(substr($category->product_type_name, 0, 2)) }}"
-                            class="!w-11 !h-11 !text-base" />
+                            class="w-11! h-11! text-base!" />
                         {{-- Texto --}}
                         <div class="flex-1 overflow-hidden whitespace-nowrap truncate pl-3">
                             <div class="font-semibold truncate">{{ $category->product_type_name }}</div>
@@ -36,7 +36,7 @@
                 @foreach ($products as $product)
                     <div class="flex justify-between items-center gap-4 px-3 hover:bg-base-200 cursor-pointer py-2">
                         <x-avatar placeholder="{{ strtoupper(substr($product->product_name, 0, 2)) }}"
-                            class="!w-11 !h-11 !text-base" />
+                            class="w-11! h-11! text-base!" />
                         <div class="flex-1 overflow-hidden whitespace-nowrap truncate pl-3">
                             <div class="font-semibold truncate">{{ $product->product_name }}</div>
                             <div class="text-base-content/50 text-sm truncate">
@@ -62,7 +62,7 @@
                 @foreach ($brands as $brand)
                     <div class="flex justify-between items-center gap-4 px-3 hover:bg-base-200 cursor-pointer py-2">
                         <x-avatar placeholder="{{ strtoupper(substr($brand->brand_name, 0, 2)) }}"
-                            class="!w-11 !h-11 !text-base" />
+                            class="w-11! h-11! text-base!" />
                         <div class="flex-1 overflow-hidden whitespace-nowrap truncate pl-3">
                             <div class="font-semibold truncate">{{ $brand->brand_name }}</div>
                             <div class="text-base-content/50 text-sm truncate">
