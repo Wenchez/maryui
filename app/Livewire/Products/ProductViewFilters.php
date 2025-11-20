@@ -67,3 +67,5 @@ class ProductViewFilters extends Component
         return view('livewire.products.product-view-filters');
     }
 }
+
+

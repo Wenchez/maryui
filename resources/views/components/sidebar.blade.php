@@ -34,7 +34,34 @@
     <div class="border-t border-base-300 px-4 py-3 mt-auto">
         @auth
             <div class="flex flex-col gap-2">
-                <span class="text-sm text-base-content/80 truncate">Hola, {{ auth()->user()->name }}</span>
+
+                <!-- POPOVER SIN IMAGEN -->
+       <x-popover hover>
+    <x-slot:trigger>
+        <div class="flex items-center gap-2 cursor-pointer">
+            {{-- Avatar con imagen o imagen por defecto --}}
+            <img 
+                src="{{ auth()->user()->avatar 
+                        ? Storage::url(auth()->user()->avatar) 
+                        : asset('storage/products/avatar.png') }}"
+                class="w-8 h-8 rounded-full object-cover"
+                alt="avatar"
+            >
+
+            {{-- Texto Hola, nombre --}}
+            <span class="text-sm hidden sm:inline">
+                Hola, {{ auth()->user()->name }}
+            </span>
+        </div>
+    </x-slot:trigger>
+
+    <x-slot:content>
+        Nombre: {{ auth()->user()->name }} <br>
+        Email: {{ auth()->user()->email }}
+    </x-slot:content>
+</x-popover>
+
+
                 <livewire:auth.logout />
             </div>
         @else
