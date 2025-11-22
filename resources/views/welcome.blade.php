@@ -105,8 +105,8 @@
         <section>
             <h2 class="text-2xl font-semibold mb-4">Lo que dicen nuestros clientes</h2>
             <div class="space-y-3">
-                <blockquote class="border-l-4 border-emerald-200 pl-4 ">"Recibí mi bolso en 2 días y la calidad es fantástica. Volveré a comprar." — María G.</blockquote>
-                <blockquote class="border-l-4 border-emerald-200 pl-4 ">"Atención al cliente muy amable y rápida solución a mi consulta." — José R.</blockquote>
+                <blockquote class="border-l-4 border-emerald-200 pl-4 ">"La calidad es fantástica. Volveré a comprar." — María G.</blockquote>
+                <blockquote class="border-l-4 border-emerald-200 pl-4 ">"Atención al cliente muy amable y rápida" — José R.</blockquote>
             </div>
         </section>
 
