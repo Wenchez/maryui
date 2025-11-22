@@ -76,7 +76,7 @@
                 <p class="text-sm text-center  mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
-                        ['image' => '/storage/products/PROD_016-Bolsa-Guess-Negra-Grande.jpeg'],
+                        ['image' => '/storage/products/PROD_008-Mochila-Guess-Mochila_Negra.jpg'],
                         ['image' => '/storage/products/PROD_002-Bolsa-Guess-Bolsa_grande_Cafe.jpg'],
                         ['image' => '/storage/products/PROD_001-Bolsa-Guess-Bolsa_Cafe.jpg'],
                     ];
@@ -90,9 +90,9 @@
                 <p class="text-sm text-center  mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
-                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM.jpeg'],
-                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (4).jpeg'],
-                        ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM (1).jpeg'],
+                        ['image' => '/storage/products/PROD_009-Set-Steve_Madden-Set_bolso,_monedero_y_llavero.jpg'],
+                        ['image' => '/storage/products/PROD_017-Cartera-Tommy_Hilfiger-Monedero_Tommy.jpeg'],
+                        ['image' => '/storage/products/PROD_018-Set-Steve_Madden-Llavero_Dorado_Steve_Madden.jpeg'],
                     ];
                 @endphp
                 <x-carousel :slides="$slidesClasicos" class="h-100!"/>
