@@ -3,7 +3,7 @@
         <!-- Hero -->
         <section class="text-center">
             <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">Ximenabags</h1>
-            <p class="text-lg text-gray-600 mb-6">Venta de bolsas, carteras , ropa y mas productos 100 % originales a un excelente precio</p>
+            <p class="text-lg  mb-5">Venta de bolsas, carteras , ropa y mas productos 100 % originales a un excelente precio</p>
 
             <div class="flex flex-col sm:flex-row justify-center gap-3 items-center">
                 @if(Route::has('login'))
@@ -26,30 +26,27 @@
 
         <x-carousel :slides="$slides" class="h-100!"/>
 
-        <!-- Características -->
-        <section class="rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Contactanos</h2>
-            <div class="space-y-4">
-                <div class="flex items-start gap-4">
-                    <div class="flex-none w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">⭐</div>
-                    <div>
-                        <h3 class="font-medium">Numero Telefonico</h3>
-                        <p class="text-sm">+52 613 121 0095</p>
-                    </div>
+        <!-- Contactanos -->
+        <section class="rounded-lg p-6 border border-emerald-200">
+            <h2 class="text-2xl font-semibold mb-6 text-center">Contáctanos</h2>
+
+            <div class="flex flex-col items-center gap-6">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mb-3">📞</div>
+                    <h3 class="font-medium">Número Telefónico</h3>
+                    <p class="text-sm">+52 613 121 0095</p>
                 </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex-none w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">⭐</div>
-                    <div>
-                        <h3 class="font-medium">Direccion</h3>
-                        <p class="text-sm text-gray-600">16 de Septiembre y Javier Fracc. Olimpico CD Contitucion B.C.S.</p>
-                    </div>
+
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mb-3">📍</div>
+                    <h3 class="font-medium">Dirección</h3>
+                    <p class="text-sm">16 de Septiembre y Javier Fracc. Olimpico CD Contitucion B.C.S.</p>
                 </div>
-                <div class="flex items-start gap-4">
-                    <div class="flex-none w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">⭐</div>
-                    <div>
-                        <h3 class="font-medium">Pagina de Facebook</h3>
-                        <p class="text-sm text-gray-600">https://www.facebook.com/share/17ib3HFfpD/</p>
-                    </div>
+
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-white text-emerald-700 rounded-full flex items-center justify-center mb-3">f</div>
+                    <h3 class="font-medium">Página de Facebook</h3>
+                    <a href="https://www.facebook.com/share/17ib3HFfpD/" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block bg-white text-emerald-700 px-4 py-2 rounded-md font-medium hover:opacity-95">Visitar Facebook</a>
                 </div>
             </div>
         </section>
@@ -60,8 +57,8 @@
             
             <!-- Colección Primavera -->
             <div class="mb-8">
-                <h3 class="text-xl font-semibold mb-3">Colecciones Femeninas</h3>
-                <p class="text-sm text-gray-600 mb-4">Colores vibrantes y diseños frescos para la temporada.</p>
+                <h3 class="text-xl font-semibold mb-3 text-center">Colecciones Femeninas</h3>
+                <p class="text-sm text-center mb-4">Colores vibrantes y diseños frescos para la temporada.</p>
                 @php
                     $slidesPrimavera = [
                         ['image' => '/storage/products/PROD_001-Bolsa-Guess-Bolsa_Cafe.jpg'],
@@ -75,8 +72,8 @@
 
             <!-- Colección Bolsos -->
             <div class="mb-8">
-                <h3 class="text-xl font-semibold mb-3">Coleccion de Bolsos</h3>
-                <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
+                <h3 class="text-xl font-semibold mb-3 text-center ">Coleccion de Bolsos</h3>
+                <p class="text-sm text-center  mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
                         ['image' => '/storage/products/PROD_016-Bolsa-Guess-Negra-Grande.jpeg'],
@@ -89,8 +86,8 @@
 
             <!-- Colección Accesorios -->
             <div class="mb-8">
-                <h3 class="text-xl font-semibold mb-3">Coleccion de Accesorios</h3>
-                <p class="text-sm text-gray-600 mb-4">Modelos atemporales que nunca fallan.</p>
+                <h3 class="text-xl text-center  font-semibold mb-3">Coleccion de Accesorios</h3>
+                <p class="text-sm text-center  mb-4">Modelos atemporales que nunca fallan.</p>
                 @php
                     $slidesClasicos = [
                         ['image' => '/photos/IMG_WELCOME/WhatsApp Image 2025-11-11 at 10.40.43 PM.jpeg'],
@@ -108,14 +105,14 @@
         <section>
             <h2 class="text-2xl font-semibold mb-4">Lo que dicen nuestros clientes</h2>
             <div class="space-y-3">
-                <blockquote class="border-l-4 border-emerald-200 pl-4 text-gray-700">"Recibí mi bolso en 2 días y la calidad es fantástica. Volveré a comprar." — María G.</blockquote>
-                <blockquote class="border-l-4 border-emerald-200 pl-4 text-gray-700">"Atención al cliente muy amable y rápida solución a mi consulta." — José R.</blockquote>
+                <blockquote class="border-l-4 border-emerald-200 pl-4 ">"Recibí mi bolso en 2 días y la calidad es fantástica. Volveré a comprar." — María G.</blockquote>
+                <blockquote class="border-l-4 border-emerald-200 pl-4 ">"Atención al cliente muy amable y rápida solución a mi consulta." — José R.</blockquote>
             </div>
         </section>
 
         <!-- Newsletter / Footer pequeño -->
         <section class="bg-gray-50 p-6 rounded-lg">
-            <footer class="text-sm text-gray-500 text-center">© {{ date('Y') }} Ximenabags — Hecho con cariño</footer>
+            <footer class="text-sm  text-center">© {{ date('Y') }} Ximenabags — Hecho con cariño</footer>
         </section>
     </main>
 </x-layouts.app>
