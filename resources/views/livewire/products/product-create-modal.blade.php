@@ -11,12 +11,45 @@
 
                 <div class="flex flex-col md:flex-row gap-6 w-full">
 
-                    <div class="flex items-center justify-center w-full md:w-auto flex-1 md:flex-none">
-                        <x-file wire:model="product_image" accept="image/*" label="Foto" crop-after-change>
-                            <img src="{{ $product_image ? $product_image->temporaryUrl() : asset('storage/products/default.png') }}"
-                                class="h-90 w-90 rounded-xl object-cover border" />
-                        </x-file>
+                    <div class="flex flex-col items-center justify-center w-full md:w-auto flex-1 md:flex-none">
+                        @if ($product_image)
+                            <img src="{{ $product_image->temporaryUrl() }}" alt="Vista previa"
+                                class="rounded-xl border shadow w-60 h-60 object-cover mb-3 transition">
+
+                            <x-button wire:click="removeImage" wire:loading.attr="disabled"
+                                class="bg-red-600! text-white! hover:bg-red-700! transition-transform hover:scale-105 active:scale-95">
+                                <span wire:loading.remove wire:target="removeImage">Quitar imagen</span>
+                                <span wire:loading wire:target="removeImage" class="flex items-center gap-2">
+                                    <span class="loading loading-spinner loading-sm"></span>Quitando...
+                                </span>
+                            </x-button>
+                        @else
+                            <div
+                                class="w-60 h-60 flex items-center justify-center border-2 border-dashed rounded-xl text-gray-400 mb-3">
+                                Sin imagen
+                            </div>
+
+                            <input id="product_image" type="file" wire:model="product_image" accept="image/*"
+                                class="hidden">
+
+                            {{-- x-button dispara el click del input --}}
+                            <x-button type="button"
+                                onclick="document.getElementById('product_image').click(); return false;"
+                                wire:loading.attr="disabled" wire:target="product_image"
+                                class="bg-blue-600! text-white! hover:bg-blue-700! transition-transform hover:scale-105 active:scale-95 px-5">
+
+                                <span wire:loading.remove wire:target="product_image">Seleccionar imagen</span>
+                                <span wire:loading wire:target="product_image" class="flex items-center gap-2">
+                                    <span class="loading loading-spinner loading-sm"></span>Cargando...
+                                </span>
+                            </x-button>
+
+                            @error('product_image')
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
+                        @endif
                     </div>
+
 
                     <div class="flex flex-col gap-1 w-full flex-1">
 

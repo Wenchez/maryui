@@ -15,7 +15,7 @@ class ProductEditModal extends Component
     use WithFileUploads;
 
     public $showModal = false;
-    
+
     public $productId = null;
 
     public $brand_id;
@@ -111,15 +111,14 @@ class ProductEditModal extends Component
         Product::updateProduct($this->productId, $data);
 
         $this->success(
-                'Producto actualizado correctamente!.',
-                position: 'toast-bottom toast-end',
-                timeout: 2500
+            'Producto actualizado correctamente!.',
+            position: 'toast-bottom toast-end',
+            timeout: 2500
         );
 
-        $this->dispatch('productUpdated',$this->productId);
+        $this->dispatch('productUpdated', $this->productId);
 
         $this->showModal = false;
-
     }
 
     public function render()

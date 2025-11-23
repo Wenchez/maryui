@@ -6,17 +6,44 @@
 
             <div class="flex flex-col md:flex-row gap-6 w-full">
 
-                <div class="flex items-center justify-center w-full md:w-auto flex-1 md:flex-none">
-                    <x-file 
-                    wire:model="product_image" 
-                    accept="image/*" 
-                    label="Foto" 
-                    crop-after-change
-                    wire:key="file-{{ $productId }}" 
-                >
-                    <img src="{{ $product_image ? $product_image->temporaryUrl() : $current_image_url }}"
-                        class="h-90 w-90 rounded-xl object-cover border" />
-                </x-file>
+                {{-- === CONTENEDOR DE IMAGEN == --}}
+                <div class="flex flex-col items-center justify-center w-full md:w-auto flex-1 md:flex-none">
+
+                    {{-- Si se selecciona UNA nueva imagen --}}
+                    @if ($product_image)
+                        <img src="{{ $product_image->temporaryUrl() }}"
+                            class="rounded-xl border shadow w-60 h-60 object-cover mb-3 transition">
+
+                        {{-- Quitar imagen NUEVA y volver a la original --}}
+                        <x-button type="button" wire:click="$set('product_image', null)"
+                            class="px-3 py-1 rounded-lg bg-red-600 text-white text-sm hover:bg-red-700 active:scale-95 transition">
+                            Quitar imagen
+                        </x-button>
+
+                        {{-- Si NO hay nueva, muestra la imagen actual --}}
+                    @else
+                        <img src="{{ $current_image_url }}"
+                            class="rounded-xl border shadow w-60 h-60 object-cover mb-3">
+
+                        <input id="product_image" type="file" wire:model="product_image" accept="image/*" class="hidden" wire:key="{{ $productId }}-image">
+
+                        {{-- Botón dispara click en input --}}
+                        <x-button type="button"
+                            onclick="document.getElementById('product_image').click(); return false;"
+                            wire:loading.attr="disabled" wire:target="product_image"
+                            class="bg-blue-600! text-white! hover:bg-blue-700! transition-transform hover:scale-105 active:scale-95 px-5">
+
+                            <span wire:loading.remove wire:target="product_image">Cambiar imagen</span>
+
+                            <span wire:loading wire:target="product_image" class="flex items-center gap-2">
+                                <span class="loading loading-spinner loading-sm"></span> Cargando...
+                            </span>
+                        </x-button>
+
+                        @error('product_image')
+                            <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                        @enderror
+                    @endif
                 </div>
 
                 <div class="flex flex-col gap-1 w-full flex-1">
