@@ -36,7 +36,7 @@ class SaleDetailSeeder extends Seeder
         $productIds = $products->keys();
 
         for ($i = 0; $i < $numberOfSales; $i++) {
-            $start = Carbon::create(2023, 1, 1);
+            $start = Carbon::create(2025, 1, 1);
             $end = Carbon::create(2025, 11, 30);
 
             $saleDate = Carbon::createFromTimestamp(rand($start->timestamp, $end->timestamp));
