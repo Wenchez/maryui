@@ -3,17 +3,23 @@
         <label for="main-drawer" class="lg:hidden mr-3 cursor-pointer">
             <x-icon name="o-bars-3" class="w-6 h-6" />
         </label>
+
+        <x-button :link="route('welcome')" class="btn btn-ghost btn-circle p-1 btn-xl">
+            <img src="{{ asset('favicon.svg') }}" alt="Logo">
+        </x-button>
+
         <div class="text-xl font-bold">Ximenabags</div>
     </div>
 
     <div class="flex items-center gap-2 flex-wrap justify-end w-auto lg:w-auto">
         <div class="hidden lg:flex items-center gap-4">
             <x-menu activate-by-route class="flex-row gap-4">
-                <div class="invisible">
-                    <x-dropdown label="The man who sold the world" class="btn-ghost font-bold"
-                        icon="o-eye-slash">
-                    </x-dropdown>
-                </div>
+                @guest
+                    <div class="invisible">
+                        <x-dropdown label="The man who sold the world" class="btn-ghost font-bold" icon="o-eye-slash">
+                        </x-dropdown>
+                    </div>
+                @endguest
                 @auth
                     <x-menu-item title="Dashboard" icon="o-home" class="font-bold" :link="route('dashboard')" />
                     <x-menu-item title="Venta" icon="o-currency-dollar" class="font-bold" :link="route('sales.index')" />
@@ -34,8 +40,24 @@
 
         <div class="hidden lg:flex items-center gap-2">
             @auth
-                <span class="text-sm hidden sm:inline">Hola, {{ auth()->user()->name }}</span>
-                <livewire:auth.logout />
+
+                <!-- Avatar -->
+                <x-popover hover>
+                    <x-slot:trigger>
+                        <div class="flex items-center gap-2 cursor-pointer">
+                            <div class="w-8 h-8 rounded-full bg-base-300 flex items-center justify-center">
+                                <x-icon name="o-user" class="w-5 h-5" />
+                            </div>
+                            <span class="text-sm hidden sm:inline font-bold">
+                                {{ auth()->user()->name }}
+                            </span>
+                        </div>
+                    </x-slot:trigger>
+
+                    <x-slot:content>
+                        <livewire:auth.logout />
+                    </x-slot:content>
+                </x-popover>
             @else
                 @if (Route::has('login'))
                     <a href="{{ route('login') }}" class="btn btn-primary">Ingresar</a>

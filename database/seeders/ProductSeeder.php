@@ -31,6 +31,8 @@ class ProductSeeder extends Seeder
             ['Tenis Blancos',         990,  'Guess',          'Tenis',         'female', 22],
             ['Tenis Rojos',          990,  'Guess',          'Tenis',         'female', 15],
             ['Tenis Negros',         990,  'Guess',          'Tenis',         'female', 10],
+            ['Monedero Tommy',       1300,  'Tommy Hilfiger', 'Cartera',       'female', 5],
+            ['Set Gorro Bufanda',    1200, 'Steve Madden',    'Set',          'female', 3]
         ];
 
         foreach ($productsToSeed as $index => $item) {

@@ -5,18 +5,25 @@
             <x-slot:menu>
                 <x-button title="Ventas" icon="o-currency-dollar" :link="route('sales.index')" tooltip="Ventas" />
             </x-slot:menu>
-            <div class="w-full h-80">
+            <div class="w-full">
                 <x-chart wire:model="incomeByMonthChart" class="w-full h-full" />
             </div>
         </x-card>
     </div>
 
-    <!-- Top usuarios -->
     <div>
         <x-card title="Mayores vendedores" class="bg-base-100 rounded-lg p-5 shadow-xs">
             <x-slot:menu>
+                <!-- Botón a usuarios -->
                 <x-button title="Usuarios" icon="o-user-group" :link="route('usuarios.index')" tooltip="Usuarios" />
+
+                <!-- Botón para cambiar Pie / Bar -->
+                <x-button wire:click="toggleTopUsersChart" title="Cambiar gráfico" icon="o-arrows-right-left"
+                    tooltip="Cambiar Pie / Barra" class="ml-2">
+                    {{ $topUsersChartType === 'pie' ? 'Barra' : 'Pie' }}
+                </x-button>
             </x-slot:menu>
+
             <div class="w-full h-80">
                 <x-chart wire:model="topUsersChart" class="w-full h-full" />
             </div>

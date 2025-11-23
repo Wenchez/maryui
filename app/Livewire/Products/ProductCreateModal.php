@@ -37,6 +37,12 @@ class ProductCreateModal extends Component
         'product_image' => 'nullable|image|max:2048', // 2MB máx
     ];
 
+    public function removeImage()
+    {
+        $this->product_image = null;
+    }
+
+
     public function mount()
     {
         $this->brands = Brand::all();
@@ -47,6 +53,7 @@ class ProductCreateModal extends Component
     {
         // Resetear campos al abrir modal
         $this->resetExcept(['brands', 'types']);
+        $this->product_image = null;
         $this->showModal = true;
     }
 
@@ -68,12 +75,12 @@ class ProductCreateModal extends Component
         $this->showModal = false;
 
         $this->success(
-                'Producto creado correctamente!.',
-                position: 'toast-bottom toast-end',
-                timeout: 2500
+            'Producto creado correctamente!.',
+            position: 'toast-bottom toast-end',
+            timeout: 2500
         );
 
-        $this->dispatch('productUpdated');
+        $this->dispatch('product-updated');
     }
 
     public function render()
