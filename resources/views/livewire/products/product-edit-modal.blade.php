@@ -6,28 +6,25 @@
 
             <div class="flex flex-col md:flex-row gap-6 w-full">
 
-                {{-- === CONTENEDOR DE IMAGEN == --}}
-                <div class="flex flex-col items-center justify-center w-full md:w-auto flex-1 md:flex-none">
+                <div class="flex flex-col items-center justify-center gap-3">
 
-                    {{-- Si se selecciona UNA nueva imagen --}}
+                    <div class="w-60 h-60 flex items-center justify-center rounded-xl overflow-hidden border shadow">
+                        @if ($product_image)
+                            <img src="{{ $product_image->temporaryUrl() }}" class="w-full h-full object-cover" />
+                        @else
+                            <img src="{{ $current_image_url }}" class="w-full h-full object-cover" />
+                        @endif
+                    </div>
+
                     @if ($product_image)
-                        <img src="{{ $product_image->temporaryUrl() }}"
-                            class="rounded-xl border shadow w-60 h-60 object-cover mb-3 transition">
-
-                        {{-- Quitar imagen NUEVA y volver a la original --}}
                         <x-button type="button" wire:click="$set('product_image', null)"
                             class="px-3 py-1 rounded-lg bg-red-600 text-white text-sm hover:bg-red-700 active:scale-95 transition">
                             Quitar imagen
                         </x-button>
-
-                        {{-- Si NO hay nueva, muestra la imagen actual --}}
                     @else
-                        <img src="{{ $current_image_url }}"
-                            class="rounded-xl border shadow w-60 h-60 object-cover mb-3">
+                        <input id="product_image" type="file" wire:model="product_image" accept="image/*"
+                            class="hidden" wire:key="{{ $productId }}-image">
 
-                        <input id="product_image" type="file" wire:model="product_image" accept="image/*" class="hidden" wire:key="{{ $productId }}-image">
-
-                        {{-- Botón dispara click en input --}}
                         <x-button type="button"
                             onclick="document.getElementById('product_image').click(); return false;"
                             wire:loading.attr="disabled" wire:target="product_image"
@@ -44,6 +41,7 @@
                             <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                         @enderror
                     @endif
+
                 </div>
 
                 <div class="flex flex-col gap-1 w-full flex-1">
@@ -61,9 +59,17 @@
 
                     <x-select label="Marca" wire:model="brand_id" :options="$brands" option-value="brand_id"
                         option-label="brand_name" placeholder="Seleccione una marca" class="w-full!" />
+
                     <x-select label="Tipo de producto" wire:model="product_type_id" :options="$types"
                         option-value="product_type_id" option-label="product_type_name" placeholder="Seleccione un tipo"
                         class="w-full!" />
+
+                    <x-select label="Disponibilidad" wire:model="product_availability_status" :options="[
+                        ['id' => 'available', 'name' => 'A la venta'],
+                        ['id' => 'discontinued', 'name' => 'Descontinuado'],
+                    ]" option-value="id"
+                        option-label="name" class="w-full!" />
+
                     <x-select label="Género" wire:model="product_gender" :options="[
                         ['id' => 'unisex', 'name' => 'Unisex'],
                         ['id' => 'male', 'name' => 'Masculino'],

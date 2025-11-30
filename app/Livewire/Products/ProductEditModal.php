@@ -101,6 +101,7 @@ class ProductEditModal extends Component
             'product_stock' => $this->product_stock,
             'product_price' => $this->product_price,
             'product_gender' => $this->product_gender,
+            'product_availability_status' => $this->product_availability_status,
             'product_date' => now()->toDateString(),
         ];
 
