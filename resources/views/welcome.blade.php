@@ -129,10 +129,5 @@
                     R.</blockquote>
             </div>
         </section>
-
-        <!-- Newsletter / Footer pequeño -->
-        <section class="bg-base-200 p-6 rounded-lg">
-            <footer class="text-sm  text-center">© {{ date('Y') }} Ximenabags — Hecho con cariño</footer>
-        </section>
     </main>
 </x-layouts.app>

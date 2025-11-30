@@ -15,21 +15,18 @@
 
             <x-slot:sub-value>
                 <div class="text-sm text-base-content/70">
-                    ${{ number_format($detail['unit_price'], 2) }} c/u —
                     <span class="font-semibold">
                         ${{ number_format($detail['quantity'] * $detail['unit_price'], 2) }}
                     </span>
-                    <span class="text-xs text-base-content/50">[Stock: {{ $detail['stock'] }}]</span>
                 </div>
             </x-slot:sub-value>
 
             <x-slot:actions>
                 <div class="flex items-center gap-2">
                     <x-input type="text" class="w-16 text-center"
-    wire:model.debounce.500ms="saleDetails.{{ $detail['product_id'] }}.quantity"
-    wire:blur="changeQuantity({{ $detail['product_id'] }}, $event.target.value)"
-    oninput="this.value = this.value.replace(/[^0-9]/g,'');"
-/>
+                        wire:model.debounce.500ms="saleDetails.{{ $detail['product_id'] }}.quantity"
+                        wire:blur="changeQuantity({{ $detail['product_id'] }}, $event.target.value)"
+                        oninput="this.value = this.value.replace(/[^0-9]/g,'');" />
 
 
 
