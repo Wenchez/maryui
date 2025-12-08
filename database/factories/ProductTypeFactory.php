@@ -3,21 +3,17 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\ProductType;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductType>
- */
 class ProductTypeFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = ProductType::class;
+
+    public function definition()
     {
         return [
-            //
+            'product_type_name' => $this->faker->unique()->word(),
+            'product_type_description' => $this->faker->sentence(), 
         ];
     }
 }
