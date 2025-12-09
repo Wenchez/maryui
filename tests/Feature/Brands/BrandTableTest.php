@@ -18,9 +18,9 @@ class BrandTableTest extends TestCase
     {
         Brand::factory()->count(3)->create();
 
-        $component = Livewire::test(BrandTable::class)->render();
+        $component = Livewire::test(BrandTable::class);
 
-        $brands = $component->get('brands');
+        $brands = $component->viewData('brands');
 
         $this->assertCount(3, $brands);
     }
@@ -31,9 +31,9 @@ class BrandTableTest extends TestCase
         Brand::factory()->create(['brand_name' => 'Zeta']);
         Brand::factory()->create(['brand_name' => 'Alpha']);
 
-        $component = Livewire::test(BrandTable::class)->render();
+        $component = Livewire::test(BrandTable::class);
 
-        $brands = $component->get('brands');
+        $brands = $component->viewData('brands');
 
         $this->assertEquals('Alpha', $brands->first()->brand_name);
     }
@@ -82,9 +82,6 @@ class BrandTableTest extends TestCase
     #[Test]
     public function refresca_la_tabla_cuando_recibe_brandUpdated()
     {
-        // Livewire 3: los eventos no refrescan el componente automáticamente en test,
-        // pero podemos verificar que el componente sigue respondiendo sin errores.
-
         $component = Livewire::test(BrandTable::class);
 
         $component->dispatch('brandUpdated');

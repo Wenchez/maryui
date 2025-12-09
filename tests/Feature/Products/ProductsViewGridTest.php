@@ -131,7 +131,7 @@ class ProductsViewGridTest extends TestCase
         // Verifica que regresa al primer producto real
         $component->assertViewHas('products', function ($products) {
             return optional($products->first())->is(
-                Product::orderBy('id')->first()
+                Product::orderBy('product_id')->first()
             );
         });
     }

@@ -9,14 +9,14 @@ use Tests\TestCase;
 
 class SaleDetailListTest extends TestCase
 {
-    /** @test */
+    
     public function it_renders_component()
     {
         Livewire::test(SaleDetailList::class)
             ->assertStatus(200);
     }
 
-    /** @test */
+    
     public function it_sets_details_correctly()
     {
         $details = [
@@ -28,7 +28,7 @@ class SaleDetailListTest extends TestCase
             ->assertSet('saleDetails', $details);
     }
 
-    /** @test */
+    
     public function it_changes_quantity_within_stock()
     {
         $product = Product::create([
@@ -46,7 +46,7 @@ class SaleDetailListTest extends TestCase
         ->assertDispatched('update-quantity', $product->id, 3);
     }
 
-    /** @test */
+    
     public function it_limits_quantity_when_exceeding_stock()
     {
         $product = Product::create([
@@ -63,7 +63,7 @@ class SaleDetailListTest extends TestCase
         ->assertSet("saleDetails.$product->id.quantity", 4); // stock máximo
     }
 
-    /** @test */
+    
     public function it_dispatches_event_on_delete()
     {
         Livewire::test(SaleDetailList::class)

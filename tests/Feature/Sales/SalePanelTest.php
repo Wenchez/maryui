@@ -8,7 +8,7 @@ use Livewire\Livewire;
 
 class SalePanelTest extends TestCase
 {
-    /** @test */
+    
     public function it_adds_a_product_to_the_sale()
     {
         $component = new SalePanel();
@@ -29,7 +29,7 @@ class SalePanelTest extends TestCase
         $this->assertEquals(116, $component->total);
     }
 
-    /** @test */
+    
     public function it_updates_product_quantity()
     {
         $component = new SalePanel();
@@ -52,7 +52,7 @@ class SalePanelTest extends TestCase
         $this->assertEquals(174, $component->total);
     }
 
-    /** @test */
+    
     public function it_removes_a_product()
     {
         $component = new SalePanel();
@@ -75,7 +75,7 @@ class SalePanelTest extends TestCase
         $this->assertEquals(0, $component->total);
     }
 
-    /** @test */
+    
     public function it_clears_the_sale()
     {
         $component = new SalePanel();

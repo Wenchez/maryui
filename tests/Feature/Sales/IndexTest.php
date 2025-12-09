@@ -8,7 +8,6 @@ use App\Livewire\Sales\Index;
 
 class IndexTest extends TestCase
 {
-    /** @test */
     public function it_renders_index_component_correctly()
     {
         Livewire::test(Index::class)
