@@ -14,8 +14,13 @@ class Filters extends Component
         'from_date',
         'to_date',
     ];
+    
+    public function updatedFromDate()
+    {
+        $this->dispatchFilters();
+    }
 
-    public function updated()
+    public function updatedToDate()
     {
         $this->dispatchFilters();
     }

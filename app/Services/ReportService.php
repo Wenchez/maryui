@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\Sale;
-use App\Models\Product;
-use App\Models\ProductType;
 use Illuminate\Support\Facades\DB;
 
 class ReportService
@@ -13,6 +11,10 @@ class ReportService
     {
         if ($from && $to) {
             $query->whereBetween($column, [$from, $to]);
+        } elseif ($from) {
+            $query->whereDate($column, '>=', $from);
+        } elseif ($to) {
+            $query->whereDate($column, '<=', $to);
         }
 
         return $query;
@@ -25,6 +27,7 @@ class ReportService
     public function getTotalIncome($from = null, $to = null)
     {
         $query = Sale::query();
+        $this->dateFilter($query, $from, $to);
         return $query->sum('sale_total');
     }
 

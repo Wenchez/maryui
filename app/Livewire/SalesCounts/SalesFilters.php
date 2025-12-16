@@ -16,8 +16,18 @@ class SalesFilters extends Component
         'to_date',
         'search',
     ];
+    
+    public function updatedFromDate()
+    {
+        $this->dispatchFilters();
+    }
 
-    public function updated()
+    public function updatedToDate()
+    {
+        $this->dispatchFilters();
+    }
+
+    public function updatedSearch()
     {
         $this->dispatchFilters();
     }
