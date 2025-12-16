@@ -5,8 +5,8 @@
                 <x-icon name="o-banknotes" class="w-9 h-9" />
             </div>
             <div class="text-left">
-                <div class="text-xs text-base-content/50 whitespace-nowrap">Total últimos 30 días</div>
-                <div class="font-black text-xl">${{ number_format($incomeLast30, 2) }}</div>
+                <div class="text-xs text-base-content/50 whitespace-nowrap">Total de ventas</div>
+                <div class="font-black text-xl">${{ number_format($income, 2) }}</div>
             </div>
         </div>
     </x-card>
@@ -17,8 +17,8 @@
                 <x-icon name="o-shopping-cart" class="w-9 h-9" />
             </div>
             <div class="text-left">
-                <div class="text-xs text-base-content/50 whitespace-nowrap">Ventas este mes</div>
-                <div class="font-black text-xl">{{ $salesThisMonth }}</div>
+                <div class="text-xs text-base-content/50 whitespace-nowrap">Ventas</div>
+                <div class="font-black text-xl">{{ $sales }}</div>
             </div>
         </div>
     </x-card>
@@ -29,7 +29,7 @@
                 <x-icon name="o-wallet" class="w-9 h-9" />
             </div>
             <div class="text-left">
-                <div class="text-xs text-base-content/50 whitespace-nowrap">Ingreso este mes</div>
+                <div class="text-xs text-base-content/50 whitespace-nowrap">Ingreso</div>
                 <div class="font-black text-xl">${{ number_format($incomeThisMonth, 2) }}</div>
             </div>
         </div>
@@ -41,8 +41,8 @@
                 <x-icon name="o-gift" class="w-9 h-9" />
             </div>
             <div class="text-left">
-                <div class="text-xs text-base-content/50 whitespace-nowrap">Productos vendidos este mes</div>
-                <div class="font-black text-xl">{{ $productsSoldThisMonth }}</div>
+                <div class="text-xs text-base-content/50 whitespace-nowrap">Productos vendidos</div>
+                <div class="font-black text-xl">{{ $products }}</div>
             </div>
         </div>
     </x-card>

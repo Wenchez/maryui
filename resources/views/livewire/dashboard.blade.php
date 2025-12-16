@@ -5,6 +5,8 @@
         </x-slot:actions>
     </x-header>
 
+    <livewire:reports.filters />
+
     <livewire:reports.summary-cards />
     <livewire:reports.charts />
     <livewire:reports.lists />
