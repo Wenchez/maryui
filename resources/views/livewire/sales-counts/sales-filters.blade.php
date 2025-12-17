@@ -7,10 +7,10 @@
     @endunless
     
     {{-- Fecha inicio --}}
-    <x-datetime label="Desde" wire:model.change="from_date" type="date" icon="o-calendar" />
+    <x-datepicker label="Desde" wire:model.change="from_date" type="date" icon="o-calendar" :config="$dateConfig"/>
 
     {{-- Fecha fin --}}
-    <x-datetime label="Hasta" wire:model.change="to_date" type="date" icon="o-calendar" />
+    <x-datepicker label="Hasta" wire:model.change="to_date" type="date" icon="o-calendar" :config="$dateConfig"/>
 
     {{-- Limpiar --}}
     <x-button tooltip="Limpiar filtros" wire:click="clearFilters" icon="o-x-mark"

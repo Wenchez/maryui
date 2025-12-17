@@ -13,6 +13,13 @@ class SalesFilters extends Component
     public $search = '';
     public bool $open = false;
 
+    public $dateConfig = [
+        'locale' => 'es',
+        'altInput' => true,
+        'altFormat' => 'd/m/Y',
+        'dateFormat' => 'Y-m-d',
+    ];
+
     public function mount(bool $isCashier = false)
     {
         $this->isCashier = $isCashier;

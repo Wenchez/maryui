@@ -10,6 +10,13 @@ class Filters extends Component
     public $to_date;
     public bool $open = false;
 
+    public $dateConfig = [
+        'locale' => 'es',
+        'altInput' => true,
+        'altFormat' => 'd/m/Y',
+        'dateFormat' => 'Y-m-d',
+    ];
+
     protected $queryString = [
         'from_date',
         'to_date',
