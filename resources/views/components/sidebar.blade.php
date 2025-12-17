@@ -9,7 +9,7 @@
         <x-button :link="route('welcome')" class="btn btn-ghost btn-circle p-1 btn-xl">
             <img src="{{ asset('favicon.svg') }}" alt="Logo">
         </x-button>
-        
+
         <div class="text-xl font-bold">Ximenabags</div>
     </div>
 
@@ -17,7 +17,10 @@
     <x-menu activate-by-route class="flex-1 overflow-y-auto px-2 py-3">
         @auth
             <x-menu-item title="Dashboard" icon="o-home" :link="route('dashboard')" />
-            <x-menu-item title="Venta" icon="o-currency-dollar" :link="route('sales.index')" />
+            <x-menu-sub title="Almacen" icon="o-building-storefront">
+                <x-menu-item title="Venta" icon="o-currency-dollar" :link="route('sales.index')" />
+                <x-menu-item title="Registro de ventas" icon="o-currency-dollar" :link="route('sales-counts.index')" />
+            </x-menu-sub>
             @if (auth()->check() && auth()->user()->isManager())
                 <x-menu-item title="Usuarios" icon="o-user-group" :link="route('usuarios.index')" />
 
@@ -33,46 +36,30 @@
     <!-- Bloque inferior fijo: login / register -->
     <div class="border-t border-base-300 px-4 py-3 mt-auto">
         @auth
-            <div class="flex flex-col gap-2">
+            <!-- Avatar -->
+            <x-popover hover>
+                <x-slot:trigger>
+                    <div class="flex items-center gap-2 cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-base-300 flex items-center justify-center">
+                            <x-icon name="o-user" class="w-5 h-5" />
+                        </div>
+                        <span class="text-sm hidden sm:inline font-bold">
+                            {{ auth()->user()->name }}
+                        </span>
+                    </div>
+                </x-slot:trigger>
 
-                <!-- POPOVER SIN IMAGEN -->
-       <x-popover hover>
-    <x-slot:trigger>
-        <div class="flex items-center gap-2 cursor-pointer">
-            {{-- Avatar con imagen o imagen por defecto --}}
-            <img 
-                src="{{ auth()->user()->avatar 
-                        ? Storage::url(auth()->user()->avatar) 
-                        : asset('storage/products/avatar.png') }}"
-                class="w-8 h-8 rounded-full object-cover"
-                alt="avatar"
-            >
-
-            {{-- Texto Hola, nombre --}}
-            <span class="text-sm hidden sm:inline">
-                Hola, {{ auth()->user()->name }}
-            </span>
-        </div>
-    </x-slot:trigger>
-
-    <x-slot:content>
-        Nombre: {{ auth()->user()->name }} <br>
-        Email: {{ auth()->user()->email }}
-    </x-slot:content>
-</x-popover>
-
-
-                <livewire:auth.logout />
-            </div>
+                <x-slot:content>
+                    <livewire:auth.logout />
+                </x-slot:content>
+            </x-popover>
         @else
-            <div class="flex flex-col gap-2">
-                @if (Route::has('login'))
-                    <a href="{{ route('login') }}" class="btn btn-primary w-full">Ingresar</a>
-                @endif
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-outline w-full">Registrarse</a>
-                @endif
-            </div>
+            @if (Route::has('login'))
+                <a href="{{ route('login') }}" class="btn btn-primary">Ingresar</a>
+            @endif
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="btn btn-outline">Registrarse</a>
+            @endif
         @endauth
     </div>
 
