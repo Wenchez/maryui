@@ -24,6 +24,13 @@ class UserSeeder extends Seeder
             'role' => 'manager',
         ]);
 
+        User::create([
+            'name' => 'Cajero',
+            'email' => 'cajero@gmail.com',
+            'password' => Hash::make('cashier'),
+            'role' => 'cashier',
+        ]);
+
         // Algunos usuarios tipo cajero
         User::factory()->count(10)->create([
             'role' => 'cashier',

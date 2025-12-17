@@ -7,43 +7,52 @@ use App\Services\ReportService;
 
 class Charts extends Component
 {
+    public $from_date;
+    public $to_date;
+
     public array $incomeByMonthChart = [];
-    public array $salesByCategoryChart = [];
     public array $topUsersChart = [];
-    public array $topProductsChart = [];
     public string $topUsersChartType = 'pie';
+
+    protected $listeners = ['report-filters-updated' => 'applyFilters'];
+
+    public function mount(ReportService $reports)
+    {
+        $this->loadCharts($reports);
+    }
+
+    public function applyFilters($filters)
+    {
+        $this->from_date = $filters['from_date'];
+        $this->to_date   = $filters['to_date'];
+
+        $this->loadCharts(app(ReportService::class));
+    }
 
     public function toggleTopUsersChart()
     {
         $this->topUsersChartType = $this->topUsersChartType === 'pie' ? 'bar' : 'pie';
-        $this->mount(app(ReportService::class)); // recarga la data de la chart con el nuevo tipo
+        $this->loadCharts(app(ReportService::class));
     }
 
-    public function mount(ReportService $reports)
+    protected function loadCharts(ReportService $reports)
     {
-        $goldColor = 'oklch(0.63 0.12 85)'; // dorado para letras de fondo
+        $goldColor = 'oklch(0.63 0.12 85)';
 
-        // --- Chart de Ingresos por mes (line) ---
-        $income = $reports->getIncomeByMonth();
+        /* ========= INGRESOS POR MES ========= */
+        $income = $reports->getIncomeByMonth($this->from_date, $this->to_date);
 
-        // Mapear números de mes a nombres completos
-    $monthNames = [
-        1 => 'Enero',
-        2 => 'Febrero',
-        3 => 'Marzo',
-        4 => 'Abril',
-        5 => 'Mayo',
-        6 => 'Junio',
-        7 => 'Julio',
-        8 => 'Agosto',
-        9 => 'Septiembre',
-        10 => 'Octubre',
-        11 => 'Noviembre',
-        12 => 'Diciembre',
-    ];
+        $monthNames = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo',
+            4 => 'Abril', 5 => 'Mayo', 6 => 'Junio',
+            7 => 'Julio', 8 => 'Agosto', 9 => 'Septiembre',
+            10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre',
+        ];
 
-    $labels = array_map(fn($monthNum) => $monthNames[(int)$monthNum] ?? $monthNum, array_keys($income));
-
+        $labels = array_map(
+            fn ($month) => $monthNames[(int)$month] ?? $month,
+            array_keys($income)
+        );
 
         $this->incomeByMonthChart = [
             'type' => 'line',
@@ -87,17 +96,15 @@ class Charts extends Component
             ],
         ];
 
-        // --- Chart de Top Usuarios (Pie o Bar dinámica) ---
-        $users = $reports->getTopUsers();
-        $labels = $users->pluck('name');
-        $data = $users->pluck('total_sales');
+        /* ========= TOP USUARIOS ========= */
+        $users = $reports->getTopUsers($this->from_date, $this->to_date);
 
         $this->topUsersChart = [
             'type' => $this->topUsersChartType,
             'data' => [
-                'labels' => $labels,
+                'labels' => $users->pluck('name'),
                 'datasets' => [
-                    ['label' => 'Ventas generadas', 'data' => $data]
+                    ['label' => 'Ventas generadas', 'data' => $users->pluck('total_sales')]
                 ],
             ],
             'options' => [

@@ -22,7 +22,6 @@
                 @endguest
                 @auth
                     <x-menu-item title="Dashboard" icon="o-home" class="font-bold" :link="route('dashboard')" />
-                    <x-menu-item title="Venta" icon="o-currency-dollar" class="font-bold" :link="route('sales.index')" />
                     @if (auth()->check() && auth()->user()->isManager())
                         <x-menu-item title="Usuarios" icon="o-user-group" class="font-bold" :link="route('usuarios.index')" />
 
@@ -32,6 +31,10 @@
                             <x-menu-item title="Categorías" icon="o-tag" :link="route('product-types.index')" />
                         </x-dropdown>
                     @endif
+                    <x-dropdown label="Ventas" class="btn-ghost font-bold" icon="o-shopping-bag">
+                        <x-menu-item title="Vender" icon="o-circle-stack" :link="route('sales.index')" />
+                        <x-menu-item title="Registro de ventas" icon="o-ticket" :link="route('sales-counts.index')" />
+                    </x-dropdown>
                 @endauth
             </x-menu>
         </div>
