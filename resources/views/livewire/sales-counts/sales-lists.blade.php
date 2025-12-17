@@ -1,7 +1,7 @@
 <div class="space-y-4 mt-4">
 
     @foreach ($sales as $sale)
-        <x-collapse separator class="bg-base-200 rounded-xl" wire:key="sale-collapse-{{ $sale->id }}">
+        <x-collapse separator class="bg-base-200 rounded-xl" wire:key="sale-collapse-{{ $sale->sale_id }}">
 
             {{-- HEADER --}}
             <x-slot:heading>
@@ -58,6 +58,14 @@
                     @endforeach
                 </div>
 
+                <div class="flex justify-start mt-3">
+                    <x-button type="button" size="sm" color="success" {{-- Notar las comillas simples ' ' dentro del wire:click --}}
+                        wire:click="downloadPdf('{{ $sale->sale_id }}')" wire:loading.attr="disabled">
+                        Descargar PDF
+                    </x-button>
+
+                </div>
+
             </x-slot:content>
 
         </x-collapse>
@@ -67,5 +75,4 @@
     <div class="mt-4">
         {{ $sales->links() }}
     </div>
-
 </div>
