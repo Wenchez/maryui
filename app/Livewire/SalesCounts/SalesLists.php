@@ -13,11 +13,26 @@ class SalesLists extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    public bool $isCashier = false;
     public array $filters = [];
+
+    public function mount(bool $isCashier = false)
+    {
+        $this->isCashier = $isCashier;
+
+        if ($this->isCashier) {
+            $this->filters['user_id'] = auth()->id();
+        }
+    }
 
     #[On('sales-filters-updated')]
     public function updateFilters($filters)
     {
+        if ($this->isCashier) {
+            $filters['user_id'] = auth()->id();
+            unset($filters['search']);
+        }
+
         $this->filters = $filters;
         $this->resetPage();
     }

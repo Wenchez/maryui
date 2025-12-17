@@ -5,21 +5,35 @@ namespace App\Livewire\SalesCounts;
 use Livewire\Component;
 use App\Services\SaleReportService;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class SalesSummaryCards extends Component
 {
+    public bool $isCashier = false;
+
     public $totalSales;
     public $totalIncome;
     public $avgTicket;
 
-    public function mount(SaleReportService $sales)
+    public function mount(SaleReportService $sales,bool $isCashier = false)
     {
-        $this->loadSummary($sales);
+        $this->isCashier = $isCashier;
+
+        $filters = $this->isCashier
+            ? ['user_id' => Auth::id()]
+            : [];
+
+        $this->loadSummary($sales, $filters);
     }
 
     #[On('sales-filters-updated')]
     public function updateSummary(array $filters)
     {
+        if ($this->isCashier) {
+            $filters['user_id'] = auth()->id();
+            unset($filters['search']);
+        }
+
         $sales = app(SaleReportService::class);
         $this->loadSummary($sales, $filters);
     }

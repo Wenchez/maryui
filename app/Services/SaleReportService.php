@@ -30,6 +30,19 @@ class SaleReportService
             $query->whereDate('sale_date', '<=', $filters['to_date']);
         }
 
+        if (!empty($filters['user_id'])) {
+            $query->where('user_id', $filters['user_id']);
+        }
+
+        if (!empty($filters['search'])) {
+            $query->where(function ($q) use ($filters) {
+                $q->where('sale_reference', 'like', "%{$filters['search']}%")
+                    ->orWhereHas('user', function ($u) use ($filters) {
+                        $u->where('name', 'like', "%{$filters['search']}%");
+                    });
+            });
+        }
+
         $totalSales  = $query->count();
         $totalIncome = $query->sum('sale_total');
 

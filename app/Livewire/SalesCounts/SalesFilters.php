@@ -6,10 +6,17 @@ use Livewire\Component;
 
 class SalesFilters extends Component
 {
+    public bool $isCashier = false;
+
     public $from_date;
     public $to_date;
     public $search = '';
     public bool $open = false;
+
+    public function mount(bool $isCashier = false)
+    {
+        $this->isCashier = $isCashier;
+    }
 
     protected $queryString = [
         'from_date',
