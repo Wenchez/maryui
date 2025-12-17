@@ -8,7 +8,8 @@
         </x-slot:actions>
     </x-header>
 
-    <livewire:sales-counts.sales-summary-cards />
+    <livewire:sales-counts.sales-summary-cards
+    :isCashier="$isCashier" />
     <livewire:sales-counts.sales-lists 
     :isCashier="$isCashier" />
 </div>

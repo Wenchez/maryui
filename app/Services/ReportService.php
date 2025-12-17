@@ -4,21 +4,27 @@ namespace App\Services;
 
 use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class ReportService
 {
-    protected function dateFilter($query, $from, $to, $column = 'sale_date')
+protected function dateFilter($query, $from, $to, $column = 'sale_date')
     {
         if ($from && $to) {
-            $query->whereBetween($column, [$from, $to]);
+            $query->whereBetween($column, [
+                Carbon::parse($from)->startOfDay(),
+                Carbon::parse($to)->endOfDay(),
+            ]);
         } elseif ($from) {
-            $query->whereDate($column, '>=', $from);
+            $query->where($column, '>=', Carbon::parse($from)->startOfDay());
         } elseif ($to) {
-            $query->whereDate($column, '<=', $to);
+            $query->where($column, '<=', Carbon::parse($to)->endOfDay());
         }
 
         return $query;
     }
+
 
     /* ===============================
      * 1. TARJETAS
