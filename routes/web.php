@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // Ruta para el Registro
-Route::get('/register', Login::class)->name('register');
+Route::get('/register', Register::class)->name('register');
 
 // Ruta para el Inicio de Sesión
 Route::get('/login', Login::class)->name('login');
