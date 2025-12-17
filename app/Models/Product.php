@@ -234,9 +234,10 @@ class Product extends Model
     }
 
     public function scopeAvailable($query)
-    {
-        return $query->where('product_availability_status', 'available');
-    }
+{
+    return $query->where('product_availability_status', 'available');
+}
+
 
     public function scopeGender($query, $genders)
     {

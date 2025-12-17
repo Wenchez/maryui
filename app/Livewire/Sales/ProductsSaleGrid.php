@@ -5,9 +5,12 @@ namespace App\Livewire\Sales;
 use Livewire\Component;
 use App\Models\Product;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class ProductsSaleGrid extends Component
 {
+    use WithPagination;
+
     public array $brands = [];
     public array $types = [];
     public array $genders = [];
@@ -33,7 +36,7 @@ class ProductsSaleGrid extends Component
         $this->genders = $filters['genders'] ?? [];
         $this->search = $filters['search'] ?? '';
 
-        // $this->resetPage(); // Descomenta si usas paginación
+        $this->resetPage();
     }
 
     #[On('product-added')]
@@ -58,7 +61,7 @@ class ProductsSaleGrid extends Component
             ->when($types, fn($q, $t) => $q->whereIn('product_type_id', $t))
             ->when($genders, fn($q, $g) => $q->whereIn('product_gender', $g))
             ->with(['brand', 'productType'])
-            ->get();
+            ->paginate(12); 
     }
 
     public function render()

@@ -3,21 +3,18 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Brand;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Brand>
- */
 class BrandFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Brand::class;
+
+    public function definition()
     {
         return [
-            //
+            'brand_name' => $this->faker->unique()->company(),   // nombre obligatorio
+            'brand_description' => $this->faker->sentence(),     // descripción opcional
         ];
     }
 }
+

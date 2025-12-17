@@ -32,9 +32,9 @@
 
             {{-- Footer con acciones --}}
             <x-slot:actions separator>
-                <x-button wire:click="close" flat>Cerrar</x-button>
-                <x-button color="success" onclick="window.print()">Imprimir</x-button>
-                <x-button wire:click="downloadPdf">Descargar PDF</x-button>
+                <x-button wire:click="close" wire:loading.attr="disabled" flat>Cerrar</x-button>
+                <x-button color="success" onclick="window.print()" wire:loading.attr="disabled">Imprimir</x-button>
+                <x-button wire:click="downloadPdf" wire:loading.attr="disabled">Descargar PDF</x-button>
             </x-slot:actions>
         @endif
     </x-card>

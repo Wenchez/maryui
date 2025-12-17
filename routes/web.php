@@ -9,6 +9,7 @@ use App\Livewire\Brands\Index as BrandsIndex;
 use App\Livewire\ProductTypes\Index as ProductTypesIndex;
 use App\Livewire\Products\Index as ProductsIndex;
 use App\Livewire\Sales\Index as SalesIndex;
+use App\Livewire\SalesCounts\Index as SalesCountsIndex;
 
 Route::get('/', fn() => view('welcome'))->name('welcome');
 
@@ -34,11 +35,15 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('ventas')->name('sales.')->group(function () {
         Route::get('/', SalesIndex::class)->name('index');
     });
+
+    Route::prefix('registros-de-ventas')->name('sales-counts.')->group(function () {
+        Route::get('/', SalesCountsIndex::class)->name('index');
+    });
 });
 
 
 // Ruta para el Registro
-Route::get('/register', Login::class)->name('register');
+Route::get('/register', Register::class)->name('register');
 
 // Ruta para el Inicio de Sesión
 Route::get('/login', Login::class)->name('login');
